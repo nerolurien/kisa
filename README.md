@@ -67,17 +67,6 @@
 
 ---
 
-## 🎨 Filosofi Desain: "Anti-Slop" Premium Soft Modern
-
-Aplikasi Kisa dirancang dengan menolak standar Material Design generik dan estetika kaku:
-1. **Ban on Default Elevations**: `elevation: 0` pada seluruh komponen. Menggunakan bayangan ultra-halus bernuansa *warm rose tint* (`Color(0xFFF43F5E).withValues(alpha: 0.05)`).
-2. **Cozy & Tactile Color Palette**: Latar belakang krem hangat (`#FAFAFA` / `#FCFCFB`), aksen mawar hangat (`#F43F5E`), dan tipografi Slate/Zinc (`#1E293B` / `#64748B`). Bebas dari pure black (`#000000`) dan pure white (`#FFFFFF`) pada area besar.
-3. **Continuous Squircle Shapes**: Kurva melengkung lembut tanpa sudut tajam dengan radius `24.0` hingga `36.0`.
-4. **Spatial Glassmorphism**: Efek kaca buram transparan (`BackdropFilter` blur 20–24) pada overlay dan floating navigation bar.
-5. **Organic Micro-interactions**: Menghilangkan efek ripple kasar bawaan `InkWell`, digantikan dengan animasi pegas fisik berbasis `GestureDetector` (`0.93 - 0.98 scale down`) dengan getaran haptik.
-
----
-
 ## 🛠️ Tech Stack & Arsitektur
 
 * **Framework**: [Flutter](https://flutter.dev) (v3.24+)
@@ -172,10 +161,3 @@ flutter build apk --release
 2. Buka tab **Actions** di GitHub repository kamu.
 3. Jalankan workflow **Build iOS IPA (Sideloadly)**.
 4. Download artifact file `Kisa.ipa` yang dihasilkan untuk di-sideload menggunakan Sideloadly.
-
----
-
-## 📄 Lisensi & Privasi
-
-Dibuat dengan cinta ❤️ khusus untuk **Rafid & Fexa**.  
-Hak cipta dilindungi. Proyek ini bersifat privat untuk keperluan personal.
