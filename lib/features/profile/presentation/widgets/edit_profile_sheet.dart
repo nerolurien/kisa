@@ -184,7 +184,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Drag Indicator
               Center(
                 child: Container(
                   width: 44,
@@ -196,8 +195,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                   ),
                 ),
               ),
-
-              // Title
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -223,8 +220,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Avatar Preview & Selector
               Center(
                 child: Container(
                   width: 88,
@@ -256,8 +251,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ),
               ),
               const SizedBox(height: 14),
-
-              // Sample Avatar List
               Text(
                 'PILIH FOTO PROFIL',
                 style: KisaTypography.caption.copyWith(
@@ -299,8 +292,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Name Input
               Text(
                 'NAMA PANGGILAN',
                 style: KisaTypography.caption.copyWith(
@@ -333,8 +324,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ),
               ),
               const SizedBox(height: 18),
-
-              // Bio Input
               Text(
                 'BIO / PESAN CINTA',
                 style: KisaTypography.caption.copyWith(
@@ -368,8 +357,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ),
               ),
               const SizedBox(height: 18),
-
-              // Anniversary Date Picker Row
               Text(
                 'HARI JADIAN / TANGGAL MULAI BERSAMA',
                 style: KisaTypography.caption.copyWith(
@@ -416,8 +403,6 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 ),
               ),
               const SizedBox(height: 24),
-
-              // Submit Button
               BouncyButton.primary(
                 label: 'Simpan Perubahan',
                 isLoading: _isSaving,

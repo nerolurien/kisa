@@ -133,7 +133,6 @@ class ProfileScreen extends ConsumerWidget {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 120),
                 children: [
-                  // Symmetrical Couple Counter Card
                   GlassyContainer(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 22, vertical: 24),
@@ -240,8 +239,6 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 18),
-
-                  // Status Aktivitas Saat Ini Card
                   GlassyContainer(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -286,8 +283,6 @@ class ProfileScreen extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(height: 14),
-
-                        // My Status Row
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 12),
@@ -322,8 +317,6 @@ class ProfileScreen extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-
-                        // Partner Status Row
                         if (partner != null)
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -370,8 +363,6 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-
-                  // Pairing Code & Info Card
                   GlassyContainer(
                     padding: const EdgeInsets.all(20),
                     child: Column(

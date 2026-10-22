@@ -1,5 +1,5 @@
 -- =====================================================================
--- KISA (COUPLE COMPANION: KIP & PIPIT) SUPABASE DATABASE SCHEMA
+-- KISA (COUPLE COMPANION: COUPLE COMPANION) SUPABASE DATABASE SCHEMA
 -- Fully Idempotent Script (Aman di-run berkali-kali tanpa error)
 -- =====================================================================
 

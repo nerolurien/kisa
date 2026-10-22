@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_typography.dart';
 
-/// Custom marker for Kip & Pipit on the live map
+/// Custom marker on the map
 class AvatarMarker extends StatelessWidget {
   final String name;
   final String? avatarUrl;

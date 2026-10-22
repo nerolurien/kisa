@@ -130,7 +130,6 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Drag Indicator
               Center(
                 child: Container(
                   width: 44,
@@ -142,8 +141,6 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                   ),
                 ),
               ),
-
-              // Title
               Row(
                 children: [
                   Container(
@@ -298,8 +295,6 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Submit Button
               BouncyButton.primary(
                 label: 'Pasang Status Sekarang',
                 isLoading: _isSaving,

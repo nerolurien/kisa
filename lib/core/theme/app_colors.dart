@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Design tokens for Kisa - Premium Soft Modern & Cozy Intimate Aesthetic
 class KisaColors {
-  // Backgrounds: Soft, warm, off-white / subtle cream (Strictly avoid pure white #FFFFFF or harsh pure black)
+  // Backgrounds
   static const Color background = Color(0xFFFAFAFA);
   static const Color backgroundWarm = Color(0xFFF5F4F0);
   static const Color surface = Color(0xFFFCFCFB);
@@ -10,15 +10,13 @@ class KisaColors {
       Color(0xF2FCFCFB); // ~95% opacity off-white cream
   static const Color glassFill =
       Color(0xD9FCFCFB); // ~85% opacity off-white cream
-
-  // Primary Accent: Warm Rose / Blush (#f43f5e per PRD)
   static const Color primaryRose = Color(0xFFF43F5E);
   static const Color primaryRoseHover = Color(0xFFE11D48);
   static const Color blushSoft = Color(0xFFFFECEF);
   static const Color blushMedium = Color(0xFFFFD1D8);
   static const Color roseGlow = Color(0x1AF43F5E); // Ultra-soft subtle glow
 
-  // Auxiliary Soft Cozy Accents for Categories & Scrapbook
+  // Accent colors
   static const Color peach = Color(0xFFF97316);
   static const Color peachSoft = Color(0xFFFFEDD5);
   static const Color chamomile = Color(0xFFF59E0B);
@@ -30,7 +28,7 @@ class KisaColors {
   static const Color lavender = Color(0xFF8B5CF6);
   static const Color lavenderSoft = Color(0xFFEDE9FE);
 
-  // Typography: Slate & Zinc (Strictly avoid pure black #000000)
+  // Typography
   static const Color textPrimary = Color(0xFF1E293B); // Slate-800 for headings
   static const Color textSecondary = Color(0xFF64748B); // Slate-500 for body
   static const Color textMuted = Color(0xFF64748B); // Slate-500

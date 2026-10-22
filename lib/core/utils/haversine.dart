@@ -27,8 +27,6 @@ class KisaHaversine {
     return earthRadiusKm * c;
   }
 
-  /// Formatted string as specified in PRD 3.D
-  /// e.g. "Pipit berjarak 4.2 km dari lokasimu"
   static String formatPartnerDistance(double? distanceKm, String partnerName) {
     if (distanceKm == null) {
       return 'Menghubungkan lokasi $partnerName...';

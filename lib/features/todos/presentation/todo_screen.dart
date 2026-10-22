@@ -51,7 +51,6 @@ class TodoScreen extends ConsumerWidget {
         bottom: false,
         child: Column(
           children: [
-            // Custom Header
             CustomHeader(
               title: 'Bucket List Kita',
               subtitle: 'Impian & Rencana Masa Depan',
@@ -79,7 +78,6 @@ class TodoScreen extends ConsumerWidget {
                 ),
               ),
             ),
-
             Expanded(
               child: RefreshIndicator(
                 color: KisaColors.primaryRose,
@@ -88,7 +86,6 @@ class TodoScreen extends ConsumerWidget {
                 child: ListView(
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 120),
                   children: [
-                    // Gamification Progress Card (PRD 3.B)
                     GlassyContainer(
                       padding: const EdgeInsets.all(20),
                       borderRadius: 28,
@@ -122,7 +119,6 @@ class TodoScreen extends ConsumerWidget {
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              // Circular Percentage Display
                               Container(
                                 width: 50,
                                 height: 50,
@@ -143,7 +139,6 @@ class TodoScreen extends ConsumerWidget {
                             ],
                           ),
                           const SizedBox(height: 14),
-                          // Smooth Progress Bar
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: LinearProgressIndicator(
@@ -158,8 +153,6 @@ class TodoScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Category Filter Pills
                     SizedBox(
                       height: 38,
                       child: ListView.separated(
@@ -205,8 +198,6 @@ class TodoScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Todos List
                     if (todoState.isLoading && todoState.todos.isEmpty)
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 40),

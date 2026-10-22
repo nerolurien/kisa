@@ -8,7 +8,7 @@ import '../features/activities/models/kisa_activity.dart';
 import '../features/map/models/kisa_location.dart';
 
 /// Central BaaS client managing Supabase Auth, PostgreSQL tables,
-/// Real-time sync, and fallback demo data for Kip & Pipit.
+/// Real-time sync, and offline fallback.
 class KisaSupabaseClient {
   static final KisaSupabaseClient _instance = KisaSupabaseClient._internal();
   factory KisaSupabaseClient() => _instance;
@@ -50,7 +50,7 @@ class KisaSupabaseClient {
     return _client!;
   }
 
-  // Local reactive couple cache (Kip & Pipit)
+  // Local cache
   KisaUser? _currentUser;
   KisaUser? _partnerUser;
   final List<KisaTodo> _cachedTodos = [];
@@ -234,10 +234,7 @@ class KisaSupabaseClient {
       updatedAt: DateTime.now().subtract(const Duration(minutes: 4)),
     );
   }
-
-  // =========================================================================
   // AUTH & PAIRING
-  // =========================================================================
 
   Future<KisaUser> signIn(
       {required String email, required String password}) async {
@@ -501,10 +498,7 @@ class KisaSupabaseClient {
       await client.from('users').update(updateData).eq('id', _currentUser!.id);
     }
   }
-
-  // =========================================================================
   // TODOS & SHARED BUCKET LIST
-  // =========================================================================
 
   /// Real-time stream for shared todos
   Stream<List<KisaTodo>> streamTodos() {
@@ -573,10 +567,7 @@ class KisaSupabaseClient {
       await client.from('todos').delete().eq('id', todoId);
     }
   }
-
-  // =========================================================================
   // ACTIVITIES (SCRAPBOOK FEED)
-  // =========================================================================
 
   /// Real-time stream for scrapbook activities
   Stream<List<KisaActivity>> streamActivities() {
@@ -657,10 +648,7 @@ class KisaSupabaseClient {
           .rpc('toggle_activity_like', params: {'activity_id': activityId});
     }
   }
-
-  // =========================================================================
   // LIVE LOCATIONS & BACKGROUND MAP TRACKING
-  // =========================================================================
 
   /// Real-time stream for partner's live GPS coordinates
   Stream<KisaLocation?> streamPartnerLocation(String partnerId) {

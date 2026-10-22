@@ -74,14 +74,11 @@ class TodoItemTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Custom squircle animated checkbox
               KisaAnimatedCheckbox(
                 value: todo.isCompleted,
                 onChanged: (_) => onToggle(),
               ),
               const SizedBox(width: 14),
-
-              // Text, category, and priority
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +100,6 @@ class TodoItemTile extends StatelessWidget {
                     const SizedBox(height: 6),
                     Row(
                       children: [
-                        // Category Chip
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 3),
@@ -122,8 +118,6 @@ class TodoItemTile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-
-                        // Priority Pill
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 3),

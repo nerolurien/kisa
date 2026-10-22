@@ -7,11 +7,11 @@ Design Language: Premium Soft Modern (Cozy, Intimate, Tactile - Anti Material De
 
 1. Product Overview
 
-Kisa adalah aplikasi seluler companion privat eksklusif yang dirancang hanya untuk dua orang (Kip & Pipit). Aplikasi ini berfungsi sebagai ruang digital bersama untuk melacak lokasi secara real-time/background (peace of mind), berbagi momen keseharian (timeline), dan merencanakan masa depan (shared bucket list), jauh dari kebisingan sosial media publik.
+Kisa adalah aplikasi seluler companion privat eksklusif yang dirancang hanya untuk dua orang (Couple). Aplikasi ini berfungsi sebagai ruang digital bersama untuk melacak lokasi secara real-time/background (peace of mind), berbagi momen keseharian (timeline), dan merencanakan masa depan (shared bucket list), jauh dari kebisingan sosial media publik.
 
 2. Target Audience
 
-Pasangan (Kip & Pipit). Sistem dikunci dan diarsiteki hanya untuk skenario 1-on-1 pairing.
+Pasangan (Couple). Sistem dikunci dan diarsiteki hanya untuk skenario 1-on-1 pairing.
 
 3. Core Features & Specifications
 
@@ -67,13 +67,13 @@ Titik lokasi menggunakan custom marker widget (Avatar/Inisial wajah masing-masin
 
 Background Tracking: Terintegrasi dengan servis lokasi latar belakang agar lokasi tetap update meski HP terkunci (memanfaatkan kapabilitas native Flutter).
 
-Bottom Sheet Info: Menampilkan teks kalkulasi jarak real-time (menggunakan Haversine formula di Dart: "Pipit berjarak 4.2 km dari lokasimu") dan cap waktu terakhir diperbarui.
+Bottom Sheet Info: Menampilkan teks kalkulasi jarak real-time (menggunakan Haversine formula di Dart: "Pasangan berjarak 4.2 km dari lokasimu") dan cap waktu terakhir diperbarui.
 
-4. UI/UX & Design Guidelines (Anti-Slop & Anti-Material)
+4. UI/UX & Design Guidelines (Bespoke Soft Modern Design)
 
-Kisa TIDAK BOLEH terlihat seperti aplikasi Material Design standar bawaan Flutter. Aplikasi harus terasa seperti aplikasi iOS kelas atas atau VisionOS.
+Kisa menerapkan desain kustom yang elegan dan intim. Aplikasi harus terasa seperti aplikasi iOS kelas atas atau VisionOS.
 
-Widget Rules: Dilarang menggunakan AppBar, Card, FloatingActionButton, atau BottomNavigationBar bawaan tanpa kustomisasi ekstrem. Buat custom widget.
+Widget Rules: Komponen UI dibangun secara kustom (custom widgets) untuk mempertahankan konsistensi visual.
 
 Warna Utama: Off-white/Cream (#FAFAFA) untuk background, Warm Rose/Blush (#f43f5e) untuk action buttons dan aksen.
 

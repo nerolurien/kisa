@@ -17,8 +17,8 @@ void main() {
     expect(distance, greaterThan(100.0));
     expect(distance, lessThan(130.0));
 
-    final text = KisaHaversine.formatPartnerDistance(4.2, 'Pipit');
-    expect(text, 'Pipit berjarak 4.2 km dari lokasimu');
+    final text = KisaHaversine.formatPartnerDistance(4.2, 'Fexa');
+    expect(text, 'Fexa berjarak 4.2 km dari lokasimu');
   });
 
   testWidgets('BouncyButton renders and taps properly', (WidgetTester tester) async {

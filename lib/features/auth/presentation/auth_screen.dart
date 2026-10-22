@@ -223,7 +223,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Brand Logo
                     Container(
                       width: 88,
                       height: 88,
@@ -481,8 +480,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                           ] else ...[
                             const SizedBox(height: 8),
                           ],
-
-                          // Submit Button
                           BouncyButton.primary(
                             label: _secondsRemaining > 0
                                 ? 'Terkunci ($_secondsRemaining dtk)'
@@ -498,8 +495,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-
-                    // Quick Demo bypass button (Kip & Fexa)
                     BouncyButton.glass(
                       onTap: () {
                         ref.read(authProvider.notifier).loginWithDemoMode();

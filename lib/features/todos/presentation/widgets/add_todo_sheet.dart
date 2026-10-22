@@ -109,15 +109,12 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                   ),
                 ),
                 const SizedBox(height: 18),
-
                 Text(
                   'Tambah Bucket List / Rencana',
                   style: KisaTypography.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 18),
-
-                // Category Chips Selector
                 Text(
                   'KATEGORI',
                   style: KisaTypography.caption.copyWith(
@@ -169,8 +166,6 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                   ),
                 ),
                 const SizedBox(height: 18),
-
-                // Text Input
                 Container(
                   decoration: BoxDecoration(
                     color: KisaColors.surface,
@@ -195,8 +190,6 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                   ),
                 ),
                 const SizedBox(height: 18),
-
-                // Priority Selector
                 Text(
                   'PRIORITAS',
                   style: KisaTypography.caption.copyWith(
@@ -243,8 +236,6 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                   }).toList(),
                 ),
                 const SizedBox(height: 24),
-
-                // Submit Button
                 BouncyButton.primary(
                   label: 'Simpan ke Bucket List',
                   icon: Icons.add_task_rounded,

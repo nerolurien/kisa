@@ -102,8 +102,6 @@ class _ScrapbookCardState extends State<ScrapbookCard>
   Widget build(BuildContext context) {
     final activity = widget.activity;
     final isMine = widget.isMyPost;
-
-    // Asymmetrical Scrapbook styling per PRD 3.C
     final rotation = isMine ? -0.008 : 0.008;
     final margin = isMine
         ? const EdgeInsets.only(right: 18, left: 6, bottom: 20)
@@ -339,8 +337,6 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                 ],
               ),
             ),
-
-            // Double Tap Heart Burst Animation (PRD 3.C)
             if (_showBurstHeart)
               AnimatedBuilder(
                 animation: _burstController,

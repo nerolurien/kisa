@@ -138,8 +138,6 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 18),
-
-                // Mood Emoji Picker (PRD 3.C)
                 Text(
                   'MOOD HARI INI',
                   style: KisaTypography.caption.copyWith(
@@ -342,8 +340,6 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Submit Button
                 BouncyButton.primary(
                   label: 'Bagikan ke Pasangan',
                   icon: Icons.send_rounded,

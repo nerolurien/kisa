@@ -79,7 +79,6 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
       backgroundColor: KisaColors.background,
       body: Stack(
         children: [
-          // FlutterMap with CartoDB Positron pastel clean tiles (no POI clutter per PRD 3.D)
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
@@ -94,7 +93,6 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
                 userAgentPackageName: 'com.example.kipit_apk',
                 maxZoom: 19,
               ),
-              // Dashed connecting line between Kip & Pipit
               if (partnerLocation != null)
                 PolylineLayer(
                   polylines: [
@@ -106,7 +104,6 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
                     ),
                   ],
                 ),
-              // Custom Markers (Avatar/Inisial per PRD 3.D)
               MarkerLayer(
                 markers: [
                   Marker(
@@ -178,8 +175,6 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
               ],
             ),
           ),
-
-          // Floating Haversine Distance Bottom Sheet (PRD 3.D)
           Positioned(
             left: 24,
             right: 24,
