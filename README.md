@@ -1,4 +1,4 @@
-# Kisa (Ruang Privat Eksklusif Dua Hati) ❤️✨
+# Kisa
 
 <p align="center">
   <img src="assets/images/app_logo.png" width="128" height="128" alt="Kisa App Logo" style="border-radius: 28px;" />
