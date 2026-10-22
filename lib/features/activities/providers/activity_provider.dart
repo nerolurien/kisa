@@ -36,14 +36,15 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
   StreamSubscription<List<KisaActivity>>? _streamSubscription;
 
   ActivityNotifier(this._supabaseClient) : super(const ActivityState()) {
-    loadActivities();
+    unawaited(loadActivities());
     _initRealtimeStream();
   }
 
   void _initRealtimeStream() {
     _streamSubscription = _supabaseClient.streamActivities().listen(
       (realtimeActivities) {
-        state = state.copyWith(activities: realtimeActivities, isLoading: false);
+        state =
+            state.copyWith(activities: realtimeActivities, isLoading: false);
       },
       onError: (err) {
         // Silent fallback on stream error
@@ -104,7 +105,9 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
     final updatedList = state.activities.map((item) {
       if (item.id == activityId) {
         final newIsLiked = !item.isLikedByMe;
-        final newCount = newIsLiked ? item.likesCount + 1 : (item.likesCount > 0 ? item.likesCount - 1 : 0);
+        final newCount = newIsLiked
+            ? item.likesCount + 1
+            : (item.likesCount > 0 ? item.likesCount - 1 : 0);
         return item.copyWith(isLikedByMe: newIsLiked, likesCount: newCount);
       }
       return item;
@@ -115,11 +118,12 @@ class ActivityNotifier extends StateNotifier<ActivityState> {
     try {
       await _supabaseClient.toggleLike(activityId);
     } catch (e) {
-      loadActivities();
+      await loadActivities();
     }
   }
 }
 
-final activityProvider = StateNotifierProvider<ActivityNotifier, ActivityState>((ref) {
+final activityProvider =
+    StateNotifierProvider<ActivityNotifier, ActivityState>((ref) {
   return ActivityNotifier(KisaSupabaseClient());
 });

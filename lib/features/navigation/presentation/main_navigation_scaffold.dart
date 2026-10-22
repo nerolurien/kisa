@@ -1,3 +1,5 @@
+import '../../map/presentation/widgets/proximity_banner.dart';
+import '../../map/providers/map_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
@@ -15,10 +17,12 @@ class MainNavigationScaffold extends ConsumerStatefulWidget {
   const MainNavigationScaffold({super.key, this.initialIndex = 0});
 
   @override
-  ConsumerState<MainNavigationScaffold> createState() => _MainNavigationScaffoldState();
+  ConsumerState<MainNavigationScaffold> createState() =>
+      _MainNavigationScaffoldState();
 }
 
-class _MainNavigationScaffoldState extends ConsumerState<MainNavigationScaffold> {
+class _MainNavigationScaffoldState
+    extends ConsumerState<MainNavigationScaffold> {
   late int _currentIndex;
 
   final List<KisaNavItem> _navItems = const [
@@ -77,15 +81,44 @@ class _MainNavigationScaffoldState extends ConsumerState<MainNavigationScaffold>
       return const Scaffold(backgroundColor: KisaColors.background);
     }
 
+    final mapState = ref.watch(mapProvider);
+
     return Scaffold(
       extendBody: true,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: const [
-          TimelineScreen(),
-          TodoScreen(),
-          LiveMapScreen(),
-          ProfileScreen(),
+      body: Stack(
+        children: [
+          IndexedStack(
+            index: _currentIndex,
+            children: const [
+              TimelineScreen(),
+              TodoScreen(),
+              LiveMapScreen(),
+              ProfileScreen(),
+            ],
+          ),
+
+          // Proximity Alert Banner (< 100 meters)
+          if (mapState.showProximityBanner && mapState.proximityMeters != null)
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: ProximityBanner(
+                    partnerName: mapState.partnerLocation?.userName ?? 'Fexa',
+                    distanceMeters: mapState.proximityMeters!,
+                    onTapViewMap: () {
+                      setState(() => _currentIndex = 2);
+                      ref.read(mapProvider.notifier).dismissProximityBanner();
+                    },
+                    onDismiss: () {
+                      ref.read(mapProvider.notifier).dismissProximityBanner();
+                    },
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
       bottomNavigationBar: SafeArea(

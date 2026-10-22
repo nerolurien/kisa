@@ -20,11 +20,14 @@ class TodoState {
 
   int get totalCount => todos.length;
   int get completedCount => todos.where((t) => t.isCompleted).length;
-  double get progressPercentage => totalCount == 0 ? 0.0 : completedCount / totalCount;
+  double get progressPercentage =>
+      totalCount == 0 ? 0.0 : completedCount / totalCount;
 
   String get gamificationCheer {
     if (totalCount == 0) return 'Mulai buat bucket list impian kita berdua ✨';
-    if (completedCount == totalCount) return 'Kita udah nyelesaiin semua $completedCount bucket list bareng! 🥂🎉';
+    if (completedCount == totalCount) {
+      return 'Kita udah nyelesaiin semua $completedCount bucket list bareng! 🥂🎉';
+    }
     return 'Kita udah nyelesaiin $completedCount dari $totalCount bucket list bareng! 🥂';
   }
 
@@ -57,7 +60,7 @@ class TodoNotifier extends StateNotifier<TodoState> {
   StreamSubscription<List<KisaTodo>>? _streamSubscription;
 
   TodoNotifier(this._supabaseClient) : super(const TodoState()) {
-    loadTodos();
+    unawaited(loadTodos());
     _initRealtimeStream();
   }
 
@@ -112,7 +115,7 @@ class TodoNotifier extends StateNotifier<TodoState> {
       await _supabaseClient.toggleTodo(todoId, newCompleted);
     } catch (e) {
       // Revert upon error
-      loadTodos();
+      await loadTodos();
     }
   }
 
@@ -150,7 +153,7 @@ class TodoNotifier extends StateNotifier<TodoState> {
     try {
       await _supabaseClient.deleteTodo(todoId);
     } catch (e) {
-      loadTodos();
+      await loadTodos();
     }
   }
 }

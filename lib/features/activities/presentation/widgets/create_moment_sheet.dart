@@ -33,19 +33,23 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
   final List<Map<String, String>> _samplePhotos = [
     {
       'label': 'Kopi',
-      'url': 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+      'url':
+          'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
     },
     {
       'label': 'Sunset',
-      'url': 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80',
+      'url':
+          'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80',
     },
     {
       'label': 'Keramik',
-      'url': 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80',
+      'url':
+          'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80',
     },
     {
       'label': 'Taman',
-      'url': 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80',
+      'url':
+          'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80',
     },
   ];
 
@@ -58,7 +62,8 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
 
   void _handleSubmit() async {
     final text = KisaSecurity.sanitize(_contentController.text, maxLength: 500);
-    final locationTag = KisaSecurity.sanitize(_locationController.text, maxLength: 60);
+    final locationTag =
+        KisaSecurity.sanitize(_locationController.text, maxLength: 60);
 
     if (text.isEmpty) {
       showKisaToast(
@@ -149,7 +154,8 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: _moods.length,
-                    separatorBuilder: (context, index) => const SizedBox(width: 8),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 8),
                     itemBuilder: (context, index) {
                       final emoji = _moods[index];
                       final isSelected = emoji == _selectedMood;
@@ -159,15 +165,20 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                           duration: const Duration(milliseconds: 180),
                           padding: const EdgeInsets.symmetric(horizontal: 14),
                           decoration: BoxDecoration(
-                            color: isSelected ? KisaColors.blushSoft : KisaColors.surface,
+                            color: isSelected
+                                ? KisaColors.blushSoft
+                                : KisaColors.surface,
                             borderRadius: BorderRadius.circular(18),
                             border: Border.all(
-                              color: isSelected ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                              color: isSelected
+                                  ? KisaColors.primaryRose
+                                  : KisaColors.borderSubtle,
                               width: isSelected ? 1.5 : 1.0,
                             ),
                           ),
                           alignment: Alignment.center,
-                          child: Text(emoji, style: const TextStyle(fontSize: 20)),
+                          child:
+                              Text(emoji, style: const TextStyle(fontSize: 20)),
                         ),
                       );
                     },
@@ -182,16 +193,20 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: KisaColors.borderSubtle),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                   child: TextField(
                     controller: _contentController,
                     maxLines: 3,
-                    style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                    style: KisaTypography.bodyLarge
+                        .copyWith(color: KisaColors.textPrimary),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Tuliskan catatan cinta atau kabar harianmu...',
-                      hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textMuted),
-                      icon: const Icon(Icons.notes_rounded, size: 20, color: KisaColors.textMuted),
+                      hintStyle: KisaTypography.bodyMedium
+                          .copyWith(color: KisaColors.textMuted),
+                      icon: const Icon(Icons.notes_rounded,
+                          size: 20, color: KisaColors.textMuted),
                     ),
                   ),
                 ),
@@ -204,33 +219,44 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: KisaColors.borderSubtle),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                   child: TextField(
                     controller: _locationController,
-                    style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                    style: KisaTypography.bodyLarge
+                        .copyWith(color: KisaColors.textPrimary),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Tag Lokasi (opsional, misal: Kedai Kopi)',
-                      hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textMuted),
-                      icon: const Icon(Icons.location_on_outlined, size: 20, color: KisaColors.textMuted),
+                      hintStyle: KisaTypography.bodyMedium
+                          .copyWith(color: KisaColors.textMuted),
+                      icon: const Icon(Icons.location_on_outlined,
+                          size: 20, color: KisaColors.textMuted),
                     ),
                   ),
                 ),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
-                  children: ['Rumah Kita 🏡', 'Kedai Kopi Sudut Temu ☕', 'Stasiun MRT 🚇', 'Taman Kota 🌿'].map((tag) {
+                  children: [
+                    'Rumah Kita 🏡',
+                    'Kedai Kopi Sudut Temu ☕',
+                    'Stasiun MRT 🚇',
+                    'Taman Kota 🌿'
+                  ].map((tag) {
                     return GestureDetector(
                       onTap: () => _locationController.text = tag,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: KisaColors.backgroundWarm,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           tag,
-                          style: KisaTypography.caption.copyWith(color: KisaColors.textSecondary),
+                          style: KisaTypography.caption
+                              .copyWith(color: KisaColors.textSecondary),
                         ),
                       ),
                     );
@@ -253,7 +279,8 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: _samplePhotos.length + 1,
-                    separatorBuilder: (context, index) => const SizedBox(width: 10),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 10),
                     itemBuilder: (context, index) {
                       if (index == 0) {
                         final isNone = _selectedPhotoUrl == null;
@@ -262,19 +289,25 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                           child: Container(
                             width: 68,
                             decoration: BoxDecoration(
-                              color: isNone ? KisaColors.blushSoft : KisaColors.surface,
+                              color: isNone
+                                  ? KisaColors.blushSoft
+                                  : KisaColors.surface,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: isNone ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                                color: isNone
+                                    ? KisaColors.primaryRose
+                                    : KisaColors.borderSubtle,
                                 width: isNone ? 1.5 : 1,
                               ),
                             ),
                             child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.hide_image_outlined, size: 18, color: KisaColors.textMuted),
+                                Icon(Icons.hide_image_outlined,
+                                    size: 18, color: KisaColors.textMuted),
                                 SizedBox(height: 4),
-                                Text('Tanpa foto', style: TextStyle(fontSize: 9.5)),
+                                Text('Tanpa foto',
+                                    style: TextStyle(fontSize: 9.5)),
                               ],
                             ),
                           ),
@@ -284,14 +317,17 @@ class _CreateMomentSheetState extends State<CreateMomentSheet> {
                       final photo = _samplePhotos[index - 1];
                       final isSelected = photo['url'] == _selectedPhotoUrl;
                       return GestureDetector(
-                        onTap: () => setState(() => _selectedPhotoUrl = photo['url']),
+                        onTap: () =>
+                            setState(() => _selectedPhotoUrl = photo['url']),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Container(
                             width: 68,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: isSelected ? KisaColors.primaryRose : Colors.transparent,
+                                color: isSelected
+                                    ? KisaColors.primaryRose
+                                    : Colors.transparent,
                                 width: 2.2,
                               ),
                             ),

@@ -41,22 +41,26 @@ class _ScrapbookCardState extends State<ScrapbookCard>
 
     _burstScale = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 1.35).chain(CurveTween(curve: Curves.easeOutBack)),
+        tween: Tween<double>(begin: 0.0, end: 1.35)
+            .chain(CurveTween(curve: Curves.easeOutBack)),
         weight: 60,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.35, end: 1.0).chain(CurveTween(curve: Curves.easeInOut)),
+        tween: Tween<double>(begin: 1.35, end: 1.0)
+            .chain(CurveTween(curve: Curves.easeInOut)),
         weight: 40,
       ),
     ]).animate(_burstController);
 
     _burstOpacity = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 1.0).chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: 0.0, end: 1.0)
+            .chain(CurveTween(curve: Curves.easeIn)),
         weight: 30,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 0.0).chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 1.0, end: 0.0)
+            .chain(CurveTween(curve: Curves.easeOut)),
         weight: 70,
       ),
     ]).animate(_burstController);
@@ -146,20 +150,25 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                             children: [
                               Text(
                                 activity.authorName,
-                                style: KisaTypography.titleMedium.copyWith(fontSize: 14.5),
+                                style: KisaTypography.titleMedium
+                                    .copyWith(fontSize: 14.5),
                               ),
                               Text(
                                 _formatTime(activity.createdAt),
-                                style: KisaTypography.caption.copyWith(color: KisaColors.textMuted),
+                                style: KisaTypography.caption
+                                    .copyWith(color: KisaColors.textMuted),
                               ),
                             ],
                           ),
                         ),
                         // Mood Emoji Sticker
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: isMine ? KisaColors.blushSoft : KisaColors.surface,
+                            color: isMine
+                                ? KisaColors.blushSoft
+                                : KisaColors.surface,
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: KisaShadows.subtle,
                           ),
@@ -173,7 +182,8 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                   ),
 
                   // Photo Memory if present
-                  if (activity.photoUrl != null && activity.photoUrl!.isNotEmpty)
+                  if (activity.photoUrl != null &&
+                      activity.photoUrl!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 14.0),
                       child: ClipRRect(
@@ -198,32 +208,40 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                                     ),
                                   );
                                 },
-                                errorBuilder: (context, error, stackTrace) => Container(
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
                                   color: KisaColors.blushSoft,
                                   child: const Center(
-                                    child: Icon(Icons.image_not_supported_rounded, color: KisaColors.primaryRose),
+                                    child: Icon(
+                                        Icons.image_not_supported_rounded,
+                                        color: KisaColors.primaryRose),
                                   ),
                                 ),
                               ),
                               // Location tag overlay on photo
-                              if (activity.locationTag != null && activity.locationTag!.isNotEmpty)
+                              if (activity.locationTag != null &&
+                                  activity.locationTag!.isNotEmpty)
                                 Positioned(
                                   bottom: 10,
                                   left: 10,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 5),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withValues(alpha: 0.45),
+                                      color:
+                                          Colors.black.withValues(alpha: 0.45),
                                       borderRadius: BorderRadius.circular(14),
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const Icon(Icons.location_on_rounded, size: 12, color: Colors.white),
+                                        const Icon(Icons.location_on_rounded,
+                                            size: 12, color: Colors.white),
                                         const SizedBox(width: 4),
                                         Text(
                                           activity.locationTag!,
-                                          style: KisaTypography.caption.copyWith(
+                                          style:
+                                              KisaTypography.caption.copyWith(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -263,7 +281,8 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                               },
                               behavior: HitTestBehavior.opaque,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
                                 decoration: BoxDecoration(
                                   color: activity.isLikedByMe
                                       ? KisaColors.blushSoft
@@ -298,14 +317,17 @@ class _ScrapbookCardState extends State<ScrapbookCard>
                             ),
                             const Spacer(),
                             if (activity.locationTag != null &&
-                                (activity.photoUrl == null || activity.photoUrl!.isEmpty))
+                                (activity.photoUrl == null ||
+                                    activity.photoUrl!.isEmpty))
                               Row(
                                 children: [
-                                  const Icon(Icons.location_on_outlined, size: 13, color: KisaColors.textMuted),
+                                  const Icon(Icons.location_on_outlined,
+                                      size: 13, color: KisaColors.textMuted),
                                   const SizedBox(width: 4),
                                   Text(
                                     activity.locationTag!,
-                                    style: KisaTypography.caption.copyWith(color: KisaColors.textMuted),
+                                    style: KisaTypography.caption
+                                        .copyWith(color: KisaColors.textMuted),
                                   ),
                                 ],
                               ),

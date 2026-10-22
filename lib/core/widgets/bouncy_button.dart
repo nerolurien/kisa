@@ -70,7 +70,8 @@ class BouncyButton extends StatefulWidget {
     VoidCallback? onTap,
     double? width,
     double? height,
-    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+    EdgeInsetsGeometry padding =
+        const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
   }) {
     return BouncyButton(
       key: key,
@@ -156,7 +157,8 @@ class _BouncyButtonState extends State<BouncyButton>
           height: widget.height,
           padding: widget.padding,
           decoration: BoxDecoration(
-            color: widget.backgroundColor ?? (widget.gradient == null ? KisaColors.primaryRose : null),
+            color: widget.backgroundColor ??
+                (widget.gradient == null ? KisaColors.primaryRose : null),
             gradient: widget.gradient,
             borderRadius: effectiveRadius,
             boxShadow: widget.shadows ?? KisaShadows.subtle,

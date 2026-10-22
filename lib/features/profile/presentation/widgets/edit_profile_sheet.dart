@@ -51,7 +51,8 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
     _nameController = TextEditingController(text: widget.user.name);
     _bioController = TextEditingController(text: widget.user.bio);
     _selectedAvatarUrl = widget.user.avatarUrl ?? _sampleAvatars.first;
-    _customAvatarUrlController = TextEditingController(text: widget.user.avatarUrl ?? '');
+    _customAvatarUrlController =
+        TextEditingController(text: widget.user.avatarUrl ?? '');
     _selectedAnniversaryDate = widget.user.anniversaryDate ??
         DateTime.now().subtract(const Duration(days: 280));
   }
@@ -68,7 +69,8 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
     final now = DateTime.now();
     final picked = await showDatePicker(
       context: context,
-      initialDate: _selectedAnniversaryDate ?? now.subtract(const Duration(days: 280)),
+      initialDate:
+          _selectedAnniversaryDate ?? now.subtract(const Duration(days: 280)),
       firstDate: DateTime(2000),
       lastDate: now,
       builder: (context, child) {
@@ -135,15 +137,28 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
   }
 
   static const _indonesianMonths = [
-    '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    '',
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
   ];
 
   String _formatDate(DateTime dt) {
     try {
       return DateFormat('d MMMM yyyy', 'id_ID').format(dt);
     } catch (_) {
-      final m = dt.month >= 1 && dt.month <= 12 ? _indonesianMonths[dt.month] : '${dt.month}';
+      final m = dt.month >= 1 && dt.month <= 12
+          ? _indonesianMonths[dt.month]
+          : '${dt.month}';
       return '${dt.day} $m ${dt.year}';
     }
   }
@@ -191,7 +206,8 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                     style: KisaTypography.titleLarge,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: KisaColors.blushSoft,
                       borderRadius: BorderRadius.circular(12),
@@ -227,8 +243,11 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                         color: KisaColors.blushMedium,
                         child: Center(
                           child: Text(
-                            widget.user.name.isNotEmpty ? widget.user.name[0] : 'K',
-                            style: KisaTypography.displayMedium.copyWith(color: KisaColors.primaryRose),
+                            widget.user.name.isNotEmpty
+                                ? widget.user.name[0]
+                                : 'K',
+                            style: KisaTypography.displayMedium
+                                .copyWith(color: KisaColors.primaryRose),
                           ),
                         ),
                       ),
@@ -265,7 +284,9 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: isSelected ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                            color: isSelected
+                                ? KisaColors.primaryRose
+                                : KisaColors.borderSubtle,
                             width: isSelected ? 2.5 : 1.2,
                           ),
                         ),
@@ -293,17 +314,21 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 decoration: BoxDecoration(
                   color: KisaColors.surface,
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: KisaColors.borderSubtle, width: 1.2),
+                  border:
+                      Border.all(color: KisaColors.borderSubtle, width: 1.2),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
                   controller: _nameController,
-                  style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                  style: KisaTypography.bodyLarge
+                      .copyWith(color: KisaColors.textPrimary),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Nama panggilanmu...',
-                    hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textLight),
-                    icon: const Icon(Icons.person_outline_rounded, size: 20, color: KisaColors.textMuted),
+                    hintStyle: KisaTypography.bodyMedium
+                        .copyWith(color: KisaColors.textLight),
+                    icon: const Icon(Icons.person_outline_rounded,
+                        size: 20, color: KisaColors.textMuted),
                   ),
                 ),
               ),
@@ -323,18 +348,22 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
                 decoration: BoxDecoration(
                   color: KisaColors.surface,
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: KisaColors.borderSubtle, width: 1.2),
+                  border:
+                      Border.all(color: KisaColors.borderSubtle, width: 1.2),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
                   controller: _bioController,
                   maxLines: 2,
-                  style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                  style: KisaTypography.bodyLarge
+                      .copyWith(color: KisaColors.textPrimary),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Catatan kecil untuk pasangan kita...',
-                    hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textLight),
-                    icon: const Icon(Icons.auto_awesome_rounded, size: 20, color: KisaColors.peach),
+                    hintStyle: KisaTypography.bodyMedium
+                        .copyWith(color: KisaColors.textLight),
+                    icon: const Icon(Icons.auto_awesome_rounded,
+                        size: 20, color: KisaColors.peach),
                   ),
                 ),
               ),
@@ -353,15 +382,18 @@ class _EditProfileSheetState extends State<EditProfileSheet> {
               GestureDetector(
                 onTap: _pickAnniversaryDate,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   decoration: BoxDecoration(
                     color: KisaColors.surface,
                     borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: KisaColors.borderSubtle, width: 1.2),
+                    border:
+                        Border.all(color: KisaColors.borderSubtle, width: 1.2),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.calendar_month_rounded, size: 20, color: KisaColors.primaryRose),
+                      const Icon(Icons.calendar_month_rounded,
+                          size: 20, color: KisaColors.primaryRose),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(

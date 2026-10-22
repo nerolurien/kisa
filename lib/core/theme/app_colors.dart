@@ -6,8 +6,10 @@ class KisaColors {
   static const Color background = Color(0xFFFAFAFA);
   static const Color backgroundWarm = Color(0xFFF5F4F0);
   static const Color surface = Color(0xFFFCFCFB);
-  static const Color surfaceGlass = Color(0xF2FCFCFB); // ~95% opacity off-white cream
-  static const Color glassFill = Color(0xD9FCFCFB);    // ~85% opacity off-white cream
+  static const Color surfaceGlass =
+      Color(0xF2FCFCFB); // ~95% opacity off-white cream
+  static const Color glassFill =
+      Color(0xD9FCFCFB); // ~85% opacity off-white cream
 
   // Primary Accent: Warm Rose / Blush (#f43f5e per PRD)
   static const Color primaryRose = Color(0xFFF43F5E);
@@ -29,10 +31,10 @@ class KisaColors {
   static const Color lavenderSoft = Color(0xFFEDE9FE);
 
   // Typography: Slate & Zinc (Strictly avoid pure black #000000)
-  static const Color textPrimary = Color(0xFF1E293B);   // Slate-800 for headings
+  static const Color textPrimary = Color(0xFF1E293B); // Slate-800 for headings
   static const Color textSecondary = Color(0xFF64748B); // Slate-500 for body
-  static const Color textMuted = Color(0xFF64748B);     // Slate-500
-  static const Color textLight = Color(0xFF94A3B8);     // Slate-400
+  static const Color textMuted = Color(0xFF64748B); // Slate-500
+  static const Color textLight = Color(0xFF94A3B8); // Slate-400
 
   // Subtle Borders
   static const Color borderSubtle = Color(0xFFE2E8F0);

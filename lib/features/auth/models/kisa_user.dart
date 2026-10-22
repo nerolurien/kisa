@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class KisaUser {
   final String id;
   final String email;
@@ -104,4 +107,32 @@ class KisaUser {
       'created_at': createdAt.toIso8601String(),
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is KisaUser &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          email == other.email &&
+          name == other.name &&
+          partnerId == other.partnerId &&
+          currentStatus == other.currentStatus &&
+          statusEmoji == other.statusEmoji &&
+          bio == other.bio &&
+          anniversaryDate == other.anniversaryDate;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      email.hashCode ^
+      name.hashCode ^
+      partnerId.hashCode ^
+      currentStatus.hashCode ^
+      statusEmoji.hashCode ^
+      bio.hashCode ^
+      anniversaryDate.hashCode;
+
+  @override
+  String toString() => 'KisaUser(id: $id, name: $name, partnerId: $partnerId)';
 }

@@ -90,8 +90,12 @@ class TodoItemTile extends StatelessWidget {
                       duration: const Duration(milliseconds: 200),
                       style: KisaTypography.bodyLarge.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: todo.isCompleted ? KisaColors.textMuted : KisaColors.textPrimary,
-                        decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+                        color: todo.isCompleted
+                            ? KisaColors.textMuted
+                            : KisaColors.textPrimary,
+                        decoration: todo.isCompleted
+                            ? TextDecoration.lineThrough
+                            : null,
                         decorationColor: KisaColors.textMuted,
                       ),
                       child: Text(todo.text),
@@ -101,7 +105,8 @@ class TodoItemTile extends StatelessWidget {
                       children: [
                         // Category Chip
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: KisaColors.backgroundWarm,
                             borderRadius: BorderRadius.circular(10),
@@ -120,7 +125,8 @@ class TodoItemTile extends StatelessWidget {
 
                         // Priority Pill
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
                             color: pBg,
                             borderRadius: BorderRadius.circular(10),

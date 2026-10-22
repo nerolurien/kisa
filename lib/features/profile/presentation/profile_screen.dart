@@ -22,13 +22,14 @@ class ProfileScreen extends ConsumerWidget {
   void _signOut(BuildContext context, WidgetRef ref) async {
     await ref.read(authProvider.notifier).signOut();
     if (!context.mounted) return;
-    Navigator.of(context).pushAndRemoveUntil(
+    await Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (_) => const AuthScreen()),
       (route) => false,
     );
   }
 
-  void _openEditProfileSheet(BuildContext context, WidgetRef ref, KisaUser user) {
+  void _openEditProfileSheet(
+      BuildContext context, WidgetRef ref, KisaUser user) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -66,7 +67,9 @@ class ProfileScreen extends ConsumerWidget {
         currentStatus: currentStatus,
         currentEmoji: currentEmoji,
         onUpdate: ({required String status, required String emoji}) async {
-          await ref.read(authProvider.notifier).updateStatus(status: status, emoji: emoji);
+          await ref
+              .read(authProvider.notifier)
+              .updateStatus(status: status, emoji: emoji);
         },
       ),
     );
@@ -95,11 +98,13 @@ class ProfileScreen extends ConsumerWidget {
                   if (user != null)
                     BouncyButton.glass(
                       onTap: () => _openEditProfileSheet(context, ref, user),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 7),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.edit_note_rounded, size: 16, color: KisaColors.primaryRose),
+                          const Icon(Icons.edit_note_rounded,
+                              size: 16, color: KisaColors.primaryRose),
                           const SizedBox(width: 4),
                           Text(
                             'Edit',
@@ -124,14 +129,14 @@ class ProfileScreen extends ConsumerWidget {
                 ],
               ),
             ),
-
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 120),
                 children: [
                   // Symmetrical Couple Counter Card
                   GlassyContainer(
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 24),
                     borderRadius: 32,
                     child: Column(
                       children: [
@@ -167,7 +172,6 @@ class ProfileScreen extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(height: 18),
-
                         Text(
                           'BERSAMA SELAMA',
                           style: KisaTypography.caption.copyWith(
@@ -177,7 +181,6 @@ class ProfileScreen extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: 4),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -202,9 +205,9 @@ class ProfileScreen extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(height: 8),
-
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 6),
                           decoration: BoxDecoration(
                             color: KisaColors.backgroundWarm,
                             borderRadius: BorderRadius.circular(16),
@@ -220,7 +223,8 @@ class ProfileScreen extends ConsumerWidget {
                         if (user?.bio != null && user!.bio.isNotEmpty) ...[
                           const SizedBox(height: 10),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Text(
                               '"${user.bio}"',
                               style: KisaTypography.bodyMedium.copyWith(
@@ -261,11 +265,13 @@ class ProfileScreen extends ConsumerWidget {
                                 user?.currentStatus ?? 'Lagi santai',
                                 user?.statusEmoji ?? '✨',
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.edit_rounded, size: 14, color: KisaColors.primaryRose),
+                                  const Icon(Icons.edit_rounded,
+                                      size: 14, color: KisaColors.primaryRose),
                                   const SizedBox(width: 4),
                                   Text(
                                     'Ubah',
@@ -283,7 +289,8 @@ class ProfileScreen extends ConsumerWidget {
 
                         // My Status Row
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 12),
                           decoration: BoxDecoration(
                             color: KisaColors.surface,
                             borderRadius: BorderRadius.circular(18),
@@ -291,7 +298,8 @@ class ProfileScreen extends ConsumerWidget {
                           ),
                           child: Row(
                             children: [
-                              Text(user?.statusEmoji ?? '✨', style: const TextStyle(fontSize: 22)),
+                              Text(user?.statusEmoji ?? '✨',
+                                  style: const TextStyle(fontSize: 22)),
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Column(
@@ -299,11 +307,13 @@ class ProfileScreen extends ConsumerWidget {
                                   children: [
                                     Text(
                                       'Status Kamu',
-                                      style: KisaTypography.caption.copyWith(fontWeight: FontWeight.w600),
+                                      style: KisaTypography.caption.copyWith(
+                                          fontWeight: FontWeight.w600),
                                     ),
                                     Text(
                                       user?.currentStatus ?? 'Lagi santai ✨',
-                                      style: KisaTypography.titleMedium.copyWith(fontSize: 15),
+                                      style: KisaTypography.titleMedium
+                                          .copyWith(fontSize: 15),
                                     ),
                                   ],
                                 ),
@@ -316,19 +326,24 @@ class ProfileScreen extends ConsumerWidget {
                         // Partner Status Row
                         if (partner != null)
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 12),
                             decoration: BoxDecoration(
                               color: KisaColors.blushSoft,
                               borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: KisaColors.primaryRose.withValues(alpha: 0.15)),
+                              border: Border.all(
+                                  color: KisaColors.primaryRose
+                                      .withValues(alpha: 0.15)),
                             ),
                             child: Row(
                               children: [
-                                Text(partner.statusEmoji, style: const TextStyle(fontSize: 22)),
+                                Text(partner.statusEmoji,
+                                    style: const TextStyle(fontSize: 22)),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Status ${partner.name}',
@@ -339,7 +354,8 @@ class ProfileScreen extends ConsumerWidget {
                                       ),
                                       Text(
                                         partner.currentStatus,
-                                        style: KisaTypography.titleMedium.copyWith(
+                                        style:
+                                            KisaTypography.titleMedium.copyWith(
                                           fontSize: 15,
                                           color: KisaColors.textPrimary,
                                         ),
@@ -375,15 +391,19 @@ class ProfileScreen extends ConsumerWidget {
                           title: 'Kode Pairing Kamu',
                           value: user?.pairingCode ?? 'KIP-749',
                           onTap: () {
-                            Clipboard.setData(ClipboardData(text: user?.pairingCode ?? 'KIP-749'));
-                            showKisaToast(context, message: 'Kode berhasil disalin!');
+                            Clipboard.setData(ClipboardData(
+                                text: user?.pairingCode ?? 'KIP-749'));
+                            showKisaToast(context,
+                                message: 'Kode berhasil disalin!');
                           },
                         ),
                         const Divider(height: 24),
                         _buildInfoRow(
                           icon: Icons.person_pin_rounded,
                           title: 'Pasangan Terhubung',
-                          value: partner != null ? '${partner.name} (${partner.pairingCode})' : 'Belum terhubung',
+                          value: partner != null
+                              ? '${partner.name} (${partner.pairingCode})'
+                              : 'Belum terhubung',
                         ),
                         const Divider(height: 24),
                         _buildInfoRow(
@@ -431,7 +451,8 @@ class ProfileScreen extends ConsumerWidget {
               children: [
                 Text(
                   title,
-                  style: KisaTypography.caption.copyWith(color: KisaColors.textMuted),
+                  style: KisaTypography.caption
+                      .copyWith(color: KisaColors.textMuted),
                 ),
                 Text(
                   value,

@@ -46,7 +46,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void _listenToPartner(String partnerId) {
     _partnerStreamSub?.cancel();
-    _partnerStreamSub = _supabaseClient.streamUser(partnerId).listen((updatedPartner) {
+    _partnerStreamSub =
+        _supabaseClient.streamUser(partnerId).listen((updatedPartner) {
       if (updatedPartner != null) {
         state = state.copyWith(partner: updatedPartner);
       }
@@ -59,7 +60,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
     super.dispose();
   }
 
-  Future<void> updateStatus({required String status, required String emoji}) async {
+  Future<void> updateStatus(
+      {required String status, required String emoji}) async {
     if (state.user == null) return;
     final updated = state.user!.copyWith(
       currentStatus: status,
@@ -165,7 +167,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<bool> signIn(String email, String password) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
-      final user = await _supabaseClient.signIn(email: email, password: password);
+      final user =
+          await _supabaseClient.signIn(email: email, password: password);
       KisaUser? partner;
       if (user.partnerId != null) {
         partner = await _supabaseClient.getPartnerProfile(user.partnerId);
@@ -216,8 +219,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       await _supabaseClient.pairWithCode(partnerCode);
       if (state.user != null) {
-        final updatedUser = await _supabaseClient.getUserProfile(state.user!.id);
-        final partner = await _supabaseClient.getPartnerProfile(updatedUser.partnerId);
+        final updatedUser =
+            await _supabaseClient.getUserProfile(state.user!.id);
+        final partner =
+            await _supabaseClient.getPartnerProfile(updatedUser.partnerId);
         if (partner != null) {
           _listenToPartner(partner.id);
         }

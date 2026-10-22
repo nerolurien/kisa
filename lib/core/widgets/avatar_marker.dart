@@ -37,7 +37,8 @@ class AvatarMarker extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 3),
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
             decoration: BoxDecoration(
-              color: isPartner ? KisaColors.primaryRose : const Color(0xFF334155),
+              color:
+                  isPartner ? KisaColors.primaryRose : const Color(0xFF334155),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
@@ -68,7 +69,10 @@ class AvatarMarker extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: (isPartner ? KisaColors.primaryRose : KisaColors.textPrimary).withValues(alpha: 0.06),
+                color: (isPartner
+                        ? KisaColors.primaryRose
+                        : KisaColors.textPrimary)
+                    .withValues(alpha: 0.06),
                 blurRadius: 10,
                 offset: const Offset(0, 3),
               ),
@@ -104,10 +108,13 @@ class AvatarMarker extends StatelessWidget {
           height: radius * 2,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: isPartner ? KisaColors.loveGradient : KisaColors.primaryGradient,
+            gradient: isPartner
+                ? KisaColors.loveGradient
+                : KisaColors.primaryGradient,
             boxShadow: [
               BoxShadow(
-                color: (isPartner ? KisaColors.primaryRose : KisaColors.sage).withValues(alpha: 0.35),
+                color: (isPartner ? KisaColors.primaryRose : KisaColors.sage)
+                    .withValues(alpha: 0.35),
                 blurRadius: 14,
                 spreadRadius: 1,
                 offset: const Offset(0, 3),

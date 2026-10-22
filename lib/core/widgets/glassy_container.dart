@@ -68,7 +68,7 @@ class _GlassyContainerState extends State<GlassyContainer>
     final effectiveBorderRadius = BorderRadius.circular(widget.borderRadius);
     final hasInteractions = widget.onTap != null || widget.onDoubleTap != null;
 
-    Widget card = Container(
+    final Widget card = Container(
       width: widget.width,
       height: widget.height,
       padding: widget.padding,
@@ -80,7 +80,7 @@ class _GlassyContainerState extends State<GlassyContainer>
       child: widget.child,
     );
 
-    Widget frosted = Container(
+    final Widget frosted = Container(
       margin: widget.margin,
       decoration: BoxDecoration(
         borderRadius: effectiveBorderRadius,

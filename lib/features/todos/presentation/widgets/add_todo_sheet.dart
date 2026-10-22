@@ -132,7 +132,8 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: _categories.length,
-                    separatorBuilder: (context, index) => const SizedBox(width: 8),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 8),
                     itemBuilder: (context, index) {
                       final cat = _categories[index];
                       final isSelected = cat == _selectedCategory;
@@ -142,17 +143,23 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                           duration: const Duration(milliseconds: 180),
                           padding: const EdgeInsets.symmetric(horizontal: 14),
                           decoration: BoxDecoration(
-                            color: isSelected ? KisaColors.primaryRose : KisaColors.surface,
+                            color: isSelected
+                                ? KisaColors.primaryRose
+                                : KisaColors.surface,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: isSelected ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                              color: isSelected
+                                  ? KisaColors.primaryRose
+                                  : KisaColors.borderSubtle,
                             ),
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             cat,
                             style: KisaTypography.caption.copyWith(
-                              color: isSelected ? Colors.white : KisaColors.textSecondary,
+                              color: isSelected
+                                  ? Colors.white
+                                  : KisaColors.textSecondary,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -170,16 +177,20 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: KisaColors.borderSubtle),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                   child: TextField(
                     controller: _textController,
                     maxLines: 2,
-                    style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                    style: KisaTypography.bodyLarge
+                        .copyWith(color: KisaColors.textPrimary),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Misal: Road trip ke Jogja naik kereta malam',
-                      hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textMuted),
-                      icon: const Icon(Icons.favorite_border_rounded, size: 20, color: KisaColors.primaryRose),
+                      hintStyle: KisaTypography.bodyMedium
+                          .copyWith(color: KisaColors.textMuted),
+                      icon: const Icon(Icons.favorite_border_rounded,
+                          size: 20, color: KisaColors.primaryRose),
                     ),
                   ),
                 ),
@@ -206,17 +217,23 @@ class _AddTodoSheetState extends State<AddTodoSheet> {
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: isSelected ? KisaColors.textPrimary : KisaColors.surface,
+                            color: isSelected
+                                ? KisaColors.textPrimary
+                                : KisaColors.surface,
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                              color: isSelected ? KisaColors.textPrimary : KisaColors.borderSubtle,
+                              color: isSelected
+                                  ? KisaColors.textPrimary
+                                  : KisaColors.borderSubtle,
                             ),
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             p,
                             style: KisaTypography.caption.copyWith(
-                              color: isSelected ? Colors.white : KisaColors.textSecondary,
+                              color: isSelected
+                                  ? Colors.white
+                                  : KisaColors.textSecondary,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

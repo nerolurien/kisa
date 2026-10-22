@@ -29,7 +29,9 @@ class TimelineScreen extends ConsumerWidget {
         currentStatus: currentStatus,
         currentEmoji: currentEmoji,
         onUpdate: ({required String status, required String emoji}) async {
-          await ref.read(authProvider.notifier).updateStatus(status: status, emoji: emoji);
+          await ref
+              .read(authProvider.notifier)
+              .updateStatus(status: status, emoji: emoji);
         },
       ),
     );
@@ -86,7 +88,8 @@ class TimelineScreen extends ConsumerWidget {
               ),
               trailing: BouncyButton.glass(
                 onTap: () => _openCreateSheet(context, ref),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -110,9 +113,11 @@ class TimelineScreen extends ConsumerWidget {
 
             // Live Couple Status Bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 6.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 6.0),
               child: GlassyContainer(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                 borderRadius: 26,
                 child: Row(
                   children: [
@@ -175,7 +180,8 @@ class TimelineScreen extends ConsumerWidget {
                         currentUser?.currentStatus ?? 'Lagi santai',
                         currentUser?.statusEmoji ?? '✨',
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -215,8 +221,10 @@ class TimelineScreen extends ConsumerWidget {
               child: RefreshIndicator(
                 color: KisaColors.primaryRose,
                 backgroundColor: KisaColors.surface,
-                onRefresh: () => ref.read(activityProvider.notifier).loadActivities(),
-                child: activityState.isLoading && activityState.activities.isEmpty
+                onRefresh: () =>
+                    ref.read(activityProvider.notifier).loadActivities(),
+                child: activityState.isLoading &&
+                        activityState.activities.isEmpty
                     ? const Center(
                         child: CircularProgressIndicator(
                           color: KisaColors.primaryRose,
@@ -230,13 +238,16 @@ class TimelineScreen extends ConsumerWidget {
                             itemCount: activityState.activities.length,
                             itemBuilder: (context, index) {
                               final act = activityState.activities[index];
-                              final isMine = act.userId == (currentUser?.id ?? 'usr_kip_01');
+                              final isMine = act.userId ==
+                                  (currentUser?.id ?? 'usr_kip_01');
                               return ScrapbookCard(
                                 key: ValueKey(act.id),
                                 activity: act,
                                 isMyPost: isMine,
                                 onLike: () {
-                                  ref.read(activityProvider.notifier).toggleLike(act.id);
+                                  ref
+                                      .read(activityProvider.notifier)
+                                      .toggleLike(act.id);
                                 },
                               );
                             },
@@ -258,7 +269,7 @@ class TimelineScreen extends ConsumerWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(22),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: KisaColors.blushSoft,
               ),

@@ -18,7 +18,10 @@ class KisaHaversine {
     final rLat2 = _toRadians(lat2);
 
     final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
-        math.cos(rLat1) * math.cos(rLat2) * math.sin(dLon / 2) * math.sin(dLon / 2);
+        math.cos(rLat1) *
+            math.cos(rLat2) *
+            math.sin(dLon / 2) *
+            math.sin(dLon / 2);
 
     final c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     return earthRadiusKm * c;

@@ -101,7 +101,8 @@ class _ToastWidgetState extends State<_ToastWidget>
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 12),
                     decoration: BoxDecoration(
                       color: KisaColors.surfaceGlass.withValues(alpha: 0.94),
                       borderRadius: BorderRadius.circular(24),

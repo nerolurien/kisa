@@ -13,6 +13,8 @@ class DistanceBottomSheet extends StatelessWidget {
   final VoidCallback onSendLovePoke;
   final String? partnerStatus;
   final String? partnerEmoji;
+  final bool isWithinProximity;
+  final VoidCallback? onTestProximity;
 
   const DistanceBottomSheet({
     super.key,
@@ -21,6 +23,8 @@ class DistanceBottomSheet extends StatelessWidget {
     required this.onSendLovePoke,
     this.partnerStatus,
     this.partnerEmoji,
+    this.isWithinProximity = false,
+    this.onTestProximity,
   });
 
   String _formatUpdatedTime(DateTime? dt) {
@@ -61,11 +65,13 @@ class DistanceBottomSheet extends StatelessWidget {
                       children: [
                         Text(
                           partnerName,
-                          style: KisaTypography.titleMedium.copyWith(fontSize: 16),
+                          style:
+                              KisaTypography.titleMedium.copyWith(fontSize: 16),
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 2),
                           decoration: BoxDecoration(
                             color: KisaColors.sageSoft,
                             borderRadius: BorderRadius.circular(10),
@@ -100,7 +106,8 @@ class DistanceBottomSheet extends StatelessWidget {
                       const SizedBox(height: 2),
                       Row(
                         children: [
-                          Text(partnerEmoji ?? '✨', style: const TextStyle(fontSize: 12)),
+                          Text(partnerEmoji ?? '✨',
+                              style: const TextStyle(fontSize: 12)),
                           const SizedBox(width: 4),
                           Expanded(
                             child: Text(
@@ -133,27 +140,58 @@ class DistanceBottomSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: KisaColors.blushSoft,
+              color: isWithinProximity
+                  ? KisaColors.primaryRose.withValues(alpha: 0.12)
+                  : KisaColors.blushSoft,
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: KisaColors.primaryRose.withValues(alpha: 0.18)),
+              border: Border.all(
+                color: isWithinProximity
+                    ? KisaColors.primaryRose.withValues(alpha: 0.5)
+                    : KisaColors.primaryRose.withValues(alpha: 0.18),
+                width: isWithinProximity ? 1.5 : 1.0,
+              ),
             ),
             child: Row(
               children: [
-                const Icon(
-                  Icons.favorite_rounded,
+                Icon(
+                  isWithinProximity
+                      ? Icons.near_me_rounded
+                      : Icons.favorite_rounded,
                   color: KisaColors.primaryRose,
                   size: 20,
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    distanceText,
+                    isWithinProximity
+                        ? '$distanceText ✨ (< 100m)'
+                        : distanceText,
                     style: KisaTypography.bodyMedium.copyWith(
                       color: KisaColors.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
+                if (onTestProximity != null)
+                  GestureDetector(
+                    onTap: onTestProximity,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: KisaColors.primaryRose.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        'Tes 100m',
+                        style: KisaTypography.caption.copyWith(
+                          color: KisaColors.primaryRose,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

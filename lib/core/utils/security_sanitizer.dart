@@ -6,9 +6,13 @@ class KisaSecurity {
   );
 
   // Dangerous script/HTML patterns
-  static final RegExp _htmlTagRegex = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: false);
-  static final RegExp _scriptRegex = RegExp(r'<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>', caseSensitive: false);
-  static final RegExp _controlCharsRegex = RegExp(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]');
+  static final RegExp _htmlTagRegex =
+      RegExp(r'<[^>]*>', multiLine: true, caseSensitive: false);
+  static final RegExp _scriptRegex = RegExp(
+      r'<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>',
+      caseSensitive: false);
+  static final RegExp _controlCharsRegex =
+      RegExp(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]');
 
   /// Sanitize user string inputs: remove dangerous script tags, HTML tags, control chars, and enforce length limits
   static String sanitize(String input, {int maxLength = 255}) {
@@ -104,11 +108,14 @@ class KisaSecurity {
     }
 
     // 6. Pairing Code Specifics
-    if (raw.contains('kode pairing') || raw.contains('target_code') || raw.contains('pairing')) {
+    if (raw.contains('kode pairing') ||
+        raw.contains('target_code') ||
+        raw.contains('pairing')) {
       if (raw.contains('tidak ditemukan') || raw.contains('tidak valid')) {
         return 'Kode pairing tidak ditemukan. Pastikan kodenya sama persis dengan di HP pasangan.';
       }
-      if (raw.contains('sudah memiliki pasangan') || raw.contains('already paired')) {
+      if (raw.contains('sudah memiliki pasangan') ||
+          raw.contains('already paired')) {
         return 'Akun ini atau pasanganmu sudah terhubung dengan akun lain.';
       }
     }

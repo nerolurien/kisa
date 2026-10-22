@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class KisaTodo {
   final String id;
   final String createdBy;
@@ -62,4 +65,29 @@ class KisaTodo {
       'created_at': createdAt.toIso8601String(),
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is KisaTodo &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          createdBy == other.createdBy &&
+          text == other.text &&
+          isCompleted == other.isCompleted &&
+          category == other.category &&
+          priority == other.priority;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      createdBy.hashCode ^
+      text.hashCode ^
+      isCompleted.hashCode ^
+      category.hashCode ^
+      priority.hashCode;
+
+  @override
+  String toString() =>
+      'KisaTodo(id: $id, text: $text, isCompleted: $isCompleted)';
 }

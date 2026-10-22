@@ -17,7 +17,8 @@ class StatusPreset {
 class UpdateStatusSheet extends StatefulWidget {
   final String currentStatus;
   final String currentEmoji;
-  final Future<void> Function({required String status, required String emoji}) onUpdate;
+  final Future<void> Function({required String status, required String emoji})
+      onUpdate;
 
   const UpdateStatusSheet({
     super.key,
@@ -51,7 +52,18 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
   ];
 
   final List<String> _customEmojis = const [
-    '✨', '💖', '🥰', '🌧️', '🎧', '🛋️', '🍕', '💻', '🧘', '🚲', '🎨', '🔥',
+    '✨',
+    '💖',
+    '🥰',
+    '🌧️',
+    '🎧',
+    '🛋️',
+    '🍕',
+    '💻',
+    '🧘',
+    '🚲',
+    '🎨',
+    '🔥',
   ];
 
   @override
@@ -136,7 +148,7 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: KisaColors.blushSoft,
                       shape: BoxShape.circle,
                     ),
@@ -152,7 +164,8 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                       children: [
                         Text(
                           'Lagi Ngapain Sekarang?',
-                          style: KisaTypography.titleLarge.copyWith(fontSize: 19),
+                          style:
+                              KisaTypography.titleLarge.copyWith(fontSize: 19),
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -187,18 +200,23 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                       _customController.text == preset.label;
                   return BouncyButton.glass(
                     onTap: () => _handlePresetSelect(preset),
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(preset.emoji, style: const TextStyle(fontSize: 14)),
+                        Text(preset.emoji,
+                            style: const TextStyle(fontSize: 14)),
                         const SizedBox(width: 6),
                         Text(
                           preset.label,
                           style: KisaTypography.bodyMedium.copyWith(
                             fontSize: 13,
-                            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                            color: isSelected ? KisaColors.primaryRose : KisaColors.textPrimary,
+                            fontWeight:
+                                isSelected ? FontWeight.w700 : FontWeight.w500,
+                            color: isSelected
+                                ? KisaColors.primaryRose
+                                : KisaColors.textPrimary,
                           ),
                         ),
                       ],
@@ -234,10 +252,14 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: isSelected ? KisaColors.blushMedium : KisaColors.surface,
+                          color: isSelected
+                              ? KisaColors.blushMedium
+                              : KisaColors.surface,
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: isSelected ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                            color: isSelected
+                                ? KisaColors.primaryRose
+                                : KisaColors.borderSubtle,
                             width: 1.5,
                           ),
                         ),
@@ -256,18 +278,22 @@ class _UpdateStatusSheetState extends State<UpdateStatusSheet> {
                 decoration: BoxDecoration(
                   color: KisaColors.surface,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: KisaColors.borderSubtle, width: 1.2),
+                  border:
+                      Border.all(color: KisaColors.borderSubtle, width: 1.2),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
                   controller: _customController,
                   maxLength: 50,
-                  style: KisaTypography.bodyLarge.copyWith(color: KisaColors.textPrimary),
+                  style: KisaTypography.bodyLarge
+                      .copyWith(color: KisaColors.textPrimary),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     counterText: '',
-                    hintText: 'Misal: Lagi nunggu hujan reda sambil baca buku...',
-                    hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textLight),
+                    hintText:
+                        'Misal: Lagi nunggu hujan reda sambil baca buku...',
+                    hintStyle: KisaTypography.bodyMedium
+                        .copyWith(color: KisaColors.textLight),
                   ),
                 ),
               ),

@@ -30,7 +30,8 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
       if (mapState.hasRealGps) {
         _hasInitialCentered = true;
         final partnerPos = mapState.partnerLocation != null
-            ? LatLng(mapState.partnerLocation!.latitude, mapState.partnerLocation!.longitude)
+            ? LatLng(mapState.partnerLocation!.latitude,
+                mapState.partnerLocation!.longitude)
             : null;
         _centerOnCouple(mapState.myLocation, partnerPos);
       }
@@ -54,7 +55,8 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
         _hasInitialCentered = true;
         WidgetsBinding.instance.addPostFrameCallback((_) {
           final partnerPos = next.partnerLocation != null
-              ? LatLng(next.partnerLocation!.latitude, next.partnerLocation!.longitude)
+              ? LatLng(next.partnerLocation!.latitude,
+                  next.partnerLocation!.longitude)
               : null;
           _centerOnCouple(next.myLocation, partnerPos);
         });
@@ -66,7 +68,8 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
 
     final myLocation = mapState.myLocation;
     final partnerLocation = mapState.partnerLocation != null
-        ? LatLng(mapState.partnerLocation!.latitude, mapState.partnerLocation!.longitude)
+        ? LatLng(mapState.partnerLocation!.latitude,
+            mapState.partnerLocation!.longitude)
         : null;
 
     final myName = authState.user?.name ?? 'Kip';
@@ -146,8 +149,12 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
                 CustomHeader(
                   title: 'Lokasi Kita',
                   subtitle: mapState.hasRealGps
-                      ? (mapState.isTracking ? 'GPS Real-time Aktif ⚡' : 'Lokasi Akurat 📍')
-                      : (mapState.isLoading ? 'Mencari sinyal GPS...' : 'Peace of Mind GPS'),
+                      ? (mapState.isTracking
+                          ? 'GPS Real-time Aktif ⚡'
+                          : 'Lokasi Akurat 📍')
+                      : (mapState.isLoading
+                          ? 'Mencari sinyal GPS...'
+                          : 'Peace of Mind GPS'),
                   trailing: BouncyButton.glass(
                     onTap: () {
                       ref.read(mapProvider.notifier).refreshLocation();
@@ -160,7 +167,9 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
                     },
                     padding: const EdgeInsets.all(10),
                     child: Icon(
-                      mapState.isLoading ? Icons.sync_rounded : Icons.my_location_rounded,
+                      mapState.isLoading
+                          ? Icons.sync_rounded
+                          : Icons.my_location_rounded,
                       size: 20,
                       color: KisaColors.primaryRose,
                     ),
@@ -180,6 +189,17 @@ class _LiveMapScreenState extends ConsumerState<LiveMapScreen> {
               distanceText: mapState.distanceText,
               partnerStatus: authState.partner?.currentStatus,
               partnerEmoji: authState.partner?.statusEmoji,
+              isWithinProximity: mapState.isWithinProximity,
+              onTestProximity: () {
+                ref
+                    .read(mapProvider.notifier)
+                    .simulateProximityForTesting(meters: 45);
+                showKisaToast(
+                  context,
+                  message: 'Simulasi: $partnerName berada 45m didekatmu! 🔔',
+                  icon: Icons.notifications_active_rounded,
+                );
+              },
               onSendLovePoke: () {
                 ref.read(mapProvider.notifier).sendLovePoke();
                 showKisaToast(

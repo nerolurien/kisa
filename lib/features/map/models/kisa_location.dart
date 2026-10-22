@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class KisaLocation {
   final String id;
   final String userId;
@@ -45,7 +48,9 @@ class KisaLocation {
           (json['users'] != null ? json['users']['name'] as String? : null) ??
           'Partner',
       avatarUrl: (json['avatar_url'] as String?) ??
-          (json['users'] != null ? json['users']['avatar_url'] as String? : null),
+          (json['users'] != null
+              ? json['users']['avatar_url'] as String?
+              : null),
       latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
       longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
       updatedAt: json['updated_at'] != null
@@ -63,4 +68,22 @@ class KisaLocation {
       'updated_at': updatedAt.toIso8601String(),
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is KisaLocation &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          userId == other.userId &&
+          latitude == other.latitude &&
+          longitude == other.longitude;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ userId.hashCode ^ latitude.hashCode ^ longitude.hashCode;
+
+  @override
+  String toString() =>
+      'KisaLocation(userId: $userId, lat: $latitude, lng: $longitude)';
 }

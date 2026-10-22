@@ -66,11 +66,12 @@ class _PairingScreenState extends ConsumerState<PairingScreen>
     if (success) {
       showKisaToast(
         context,
-        message: 'Berhasil terhubung dengan pasanganmu! Selamat datang di Kisa ❤️',
+        message:
+            'Berhasil terhubung dengan pasanganmu! Selamat datang di Kisa ❤️',
         icon: Icons.favorite_rounded,
         iconColor: KisaColors.primaryRose,
       );
-      Navigator.of(context).pushReplacement(
+      await Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const MainNavigationScaffold()),
       );
     } else {
@@ -114,13 +115,15 @@ class _PairingScreenState extends ConsumerState<PairingScreen>
                 const SizedBox(height: 18),
                 Text(
                   'Kembali ke Halaman Masuk?',
-                  style: KisaTypography.titleLarge.copyWith(fontWeight: FontWeight.w700),
+                  style: KisaTypography.titleLarge
+                      .copyWith(fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   'Kamu akan keluar dari akun ini dan kembali ke menu masuk/daftar. Kode pairing kamu tetap aman tersimpan.',
-                  style: KisaTypography.bodyMedium.copyWith(color: KisaColors.textSecondary),
+                  style: KisaTypography.bodyMedium
+                      .copyWith(color: KisaColors.textSecondary),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -148,8 +151,9 @@ class _PairingScreenState extends ConsumerState<PairingScreen>
                           Navigator.of(ctx).pop();
                           await ref.read(authProvider.notifier).signOut();
                           if (!mounted) return;
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (_) => const AuthScreen()),
+                          await Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (_) => const AuthScreen()),
                           );
                         },
                       ),
@@ -308,7 +312,8 @@ class _PairingScreenState extends ConsumerState<PairingScreen>
                     ),
                     const SizedBox(height: 12),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                       decoration: BoxDecoration(
                         color: KisaColors.backgroundWarm,
                         borderRadius: BorderRadius.circular(20),
@@ -368,7 +373,8 @@ class _PairingScreenState extends ConsumerState<PairingScreen>
                       decoration: BoxDecoration(
                         color: KisaColors.surface,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: KisaColors.borderSubtle, width: 1.2),
+                        border: Border.all(
+                            color: KisaColors.borderSubtle, width: 1.2),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextField(

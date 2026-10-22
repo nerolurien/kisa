@@ -16,7 +16,8 @@ class KisaSupabaseClient {
 
   /// Supabase project URL loaded dynamically from .env or --dart-define
   static String get supabaseUrl {
-    if (dotenv.isInitialized && (dotenv.env['SUPABASE_URL']?.isNotEmpty ?? false)) {
+    if (dotenv.isInitialized &&
+        (dotenv.env['SUPABASE_URL']?.isNotEmpty ?? false)) {
       return dotenv.env['SUPABASE_URL']!;
     }
     return const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
@@ -24,7 +25,8 @@ class KisaSupabaseClient {
 
   /// Supabase Anon / Publishable Key loaded dynamically from .env or --dart-define
   static String get supabaseAnonKey {
-    if (dotenv.isInitialized && (dotenv.env['SUPABASE_ANON_KEY']?.isNotEmpty ?? false)) {
+    if (dotenv.isInitialized &&
+        (dotenv.env['SUPABASE_ANON_KEY']?.isNotEmpty ?? false)) {
       return dotenv.env['SUPABASE_ANON_KEY']!;
     }
     return const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
@@ -75,13 +77,20 @@ class KisaSupabaseClient {
         );
         _client = Supabase.instance.client;
         _isInitialized = true;
-        if (kDebugMode) debugPrint('[KisaSupabaseClient] Connected to live Supabase cloud');
+        if (kDebugMode) {
+          debugPrint('[KisaSupabaseClient] Connected to live Supabase cloud');
+        }
       } catch (e) {
-        if (kDebugMode) debugPrint('[KisaSupabaseClient] Supabase init warning: $e. Starting local engine.');
+        if (kDebugMode) {
+          debugPrint(
+              '[KisaSupabaseClient] Supabase init warning: $e. Starting local engine.');
+        }
         _setupInitialCoupleData();
       }
     } else {
-      if (kDebugMode) debugPrint('[KisaSupabaseClient] Running with local demo state.');
+      if (kDebugMode) {
+        debugPrint('[KisaSupabaseClient] Running with local demo state.');
+      }
       _setupInitialCoupleData();
     }
   }
@@ -92,7 +101,8 @@ class KisaSupabaseClient {
       email: 'kip@kisa.love',
       name: 'Kip',
       partnerId: 'usr_fexa_02',
-      avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
       pairingCode: 'KIP-749',
       currentStatus: 'Lagi ngopi santai ☕',
       statusEmoji: '☕',
@@ -105,7 +115,8 @@ class KisaSupabaseClient {
       email: 'fexa@kisa.love',
       name: 'Fexa',
       partnerId: 'usr_kip_01',
-      avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
       pairingCode: 'FEX-882',
       currentStatus: 'Sedang kerja di kantor 💼',
       statusEmoji: '💼',
@@ -166,10 +177,13 @@ class KisaSupabaseClient {
         id: 'act_01',
         userId: 'usr_fexa_02',
         authorName: 'Fexa',
-        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
-        content: 'Menemukan cafe mungil dengan taman rahasia di belakang stasiun. Kopi hazelnut-nya enak banget, aku simpan meja buat kamu!',
+        authorAvatar:
+            'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+        content:
+            'Menemukan cafe mungil dengan taman rahasia di belakang stasiun. Kopi hazelnut-nya enak banget, aku simpan meja buat kamu!',
         moodEmoji: '☕',
-        photoUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+        photoUrl:
+            'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
         locationTag: 'Kedai Kopi Sudut Temu',
         likesCount: 14,
         isLikedByMe: true,
@@ -179,10 +193,13 @@ class KisaSupabaseClient {
         id: 'act_02',
         userId: 'usr_kip_01',
         authorName: 'Kip',
-        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-        content: 'Langit sore ini warnanya pink keemasan. Langsung keinget senyummu tadi pagi pas pamitan ✨',
+        authorAvatar:
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        content:
+            'Langit sore ini warnanya pink keemasan. Langsung keinget senyummu tadi pagi pas pamitan ✨',
         moodEmoji: '🌅',
-        photoUrl: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80',
+        photoUrl:
+            'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80',
         locationTag: 'Jembatan Penyeberangan Pinisi',
         likesCount: 22,
         isLikedByMe: false,
@@ -192,10 +209,13 @@ class KisaSupabaseClient {
         id: 'act_03',
         userId: 'usr_fexa_02',
         authorName: 'Fexa',
-        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
-        content: 'Cangkir keramik handmade kita dari workshop minggu lalu udah jadi dan selesai dibakar! Nanti malam kita minum teh bareng yaa 🍵',
+        authorAvatar:
+            'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+        content:
+            'Cangkir keramik handmade kita dari workshop minggu lalu udah jadi dan selesai dibakar! Nanti malam kita minum teh bareng yaa 🍵',
         moodEmoji: '✨',
-        photoUrl: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80',
+        photoUrl:
+            'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80',
         locationTag: 'Studio Tanah Liat Kita',
         likesCount: 19,
         isLikedByMe: true,
@@ -207,7 +227,8 @@ class KisaSupabaseClient {
       id: 'loc_01',
       userId: 'usr_fexa_02',
       userName: 'Fexa',
-      avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
       latitude: -6.2297,
       longitude: 106.8167,
       updatedAt: DateTime.now().subtract(const Duration(minutes: 4)),
@@ -218,10 +239,12 @@ class KisaSupabaseClient {
   // AUTH & PAIRING
   // =========================================================================
 
-  Future<KisaUser> signIn({required String email, required String password}) async {
+  Future<KisaUser> signIn(
+      {required String email, required String password}) async {
     if (isLiveSupabase) {
       try {
-        final res = await client.auth.signInWithPassword(email: email, password: password);
+        final res = await client.auth
+            .signInWithPassword(email: email, password: password);
         final userId = res.user?.id;
         if (userId == null) throw Exception('Email atau kata sandi salah.');
         final profile = await getUserProfile(userId, fallbackEmail: email);
@@ -234,7 +257,8 @@ class KisaSupabaseClient {
             'Email belum dikonfirmasi. Cek link di kotak masuk/spam email Anda, atau matikan "Confirm email" di Dashboard Supabase > Authentication > Providers > Email.',
           );
         } else if (msg.contains('invalid login credentials')) {
-          throw Exception('Email atau kata sandi tidak cocok. Jika belum punya akun, silakan klik tab "Daftar Akun" di atas.');
+          throw Exception(
+              'Email atau kata sandi tidak cocok. Jika belum punya akun, silakan klik tab "Daftar Akun" di atas.');
         }
         throw Exception(e.message);
       } catch (e) {
@@ -267,7 +291,9 @@ class KisaSupabaseClient {
           data: {'name': name},
         );
         final user = res.user;
-        if (user == null) throw Exception('Pendaftaran akun gagal. Silakan coba lagi.');
+        if (user == null) {
+          throw Exception('Pendaftaran akun gagal. Silakan coba lagi.');
+        }
 
         final newUser = KisaUser(
           id: user.id,
@@ -281,7 +307,9 @@ class KisaSupabaseClient {
         try {
           await client.from('users').upsert(newUser.toJson());
         } catch (e) {
-          if (kDebugMode) debugPrint('[KisaSupabaseClient] Notice on users upsert: $e');
+          if (kDebugMode) {
+            debugPrint('[KisaSupabaseClient] Notice on users upsert: $e');
+          }
         }
 
         if (res.session == null) {
@@ -295,7 +323,8 @@ class KisaSupabaseClient {
       } on AuthApiException catch (e) {
         final msg = e.message.toLowerCase();
         if (msg.contains('user already registered')) {
-          throw Exception('Email ini sudah terdaftar. Silakan pilih tab "Masuk" untuk login.');
+          throw Exception(
+              'Email ini sudah terdaftar. Silakan pilih tab "Masuk" untuk login.');
         } else if (msg.contains('password should be at least')) {
           throw Exception('Kata sandi minimal harus 6 karakter.');
         }
@@ -330,7 +359,8 @@ class KisaSupabaseClient {
     String? fallbackName,
   }) async {
     if (isLiveSupabase) {
-      final res = await client.from('users').select().eq('id', userId).maybeSingle();
+      final res =
+          await client.from('users').select().eq('id', userId).maybeSingle();
       if (res != null) {
         final profile = KisaUser.fromJson(res);
         _currentUser = profile;
@@ -338,8 +368,11 @@ class KisaSupabaseClient {
       }
 
       // Auto-heal missing profile in public.users
-      final email = fallbackEmail ?? client.auth.currentUser?.email ?? 'user@kisa.love';
-      final name = fallbackName ?? client.auth.currentUser?.userMetadata?['name'] ?? email.split('@').first;
+      final email =
+          fallbackEmail ?? client.auth.currentUser?.email ?? 'user@kisa.love';
+      final name = fallbackName ??
+          client.auth.currentUser?.userMetadata?['name'] ??
+          email.split('@').first;
       final pairingCode = _generatePairingCode(name);
 
       final profileMap = {
@@ -353,7 +386,9 @@ class KisaSupabaseClient {
       try {
         await client.from('users').upsert(profileMap);
       } catch (e) {
-        if (kDebugMode) debugPrint('[KisaSupabaseClient] Auto-heal warning: $e');
+        if (kDebugMode) {
+          debugPrint('[KisaSupabaseClient] Auto-heal warning: $e');
+        }
       }
 
       final healedUser = KisaUser.fromJson(profileMap);
@@ -367,7 +402,11 @@ class KisaSupabaseClient {
     if (partnerId == null || partnerId.isEmpty) return null;
     if (isLiveSupabase) {
       try {
-        final res = await client.from('users').select().eq('id', partnerId).maybeSingle();
+        final res = await client
+            .from('users')
+            .select()
+            .eq('id', partnerId)
+            .maybeSingle();
         if (res == null) return null;
         return KisaUser.fromJson(res);
       } catch (e) {
@@ -389,11 +428,13 @@ class KisaSupabaseClient {
             return KisaUser.fromJson(records.first);
           });
     }
-    return Stream.value(userId == _currentUser?.id ? _currentUser : _partnerUser);
+    return Stream.value(
+        userId == _currentUser?.id ? _currentUser : _partnerUser);
   }
 
   /// Update current user live activity status
-  Future<void> updateMyStatus({required String status, required String emoji}) async {
+  Future<void> updateMyStatus(
+      {required String status, required String emoji}) async {
     final now = DateTime.now();
     _currentUser = _currentUser?.copyWith(
       currentStatus: status,
@@ -413,7 +454,8 @@ class KisaSupabaseClient {
   Future<bool> pairWithCode(String targetCode) async {
     final cleanCode = targetCode.trim().toUpperCase();
     if (isLiveSupabase) {
-      final res = await client.rpc('pair_with_code', params: {'target_code': cleanCode});
+      final res = await client
+          .rpc('pair_with_code', params: {'target_code': cleanCode});
       if (res != null && res['success'] == true) {
         return true;
       } else {
@@ -428,7 +470,8 @@ class KisaSupabaseClient {
       _partnerUser = _partnerUser?.copyWith(partnerId: _currentUser?.id);
       return true;
     }
-    throw Exception('Kode pairing tidak ditemukan. Pastikan kodenya sama dengan di HP pasangan!');
+    throw Exception(
+        'Kode pairing tidak ditemukan. Pastikan kodenya sama dengan di HP pasangan!');
   }
 
   /// Update user profile details (name, avatar, bio, anniversary)
@@ -477,7 +520,10 @@ class KisaSupabaseClient {
 
   Future<List<KisaTodo>> fetchTodos() async {
     if (isLiveSupabase) {
-      final res = await client.from('todos').select().order('created_at', ascending: false);
+      final res = await client
+          .from('todos')
+          .select()
+          .order('created_at', ascending: false);
       return (res as List).map((e) => KisaTodo.fromJson(e)).toList();
     }
     return List.from(_cachedTodos);
@@ -499,7 +545,8 @@ class KisaSupabaseClient {
     );
 
     if (isLiveSupabase) {
-      final res = await client.from('todos').insert(newTodo.toJson()).select().single();
+      final res =
+          await client.from('todos').insert(newTodo.toJson()).select().single();
       return KisaTodo.fromJson(res);
     }
 
@@ -514,7 +561,9 @@ class KisaSupabaseClient {
     }
 
     if (isLiveSupabase) {
-      await client.from('todos').update({'is_completed': isCompleted}).eq('id', todoId);
+      await client
+          .from('todos')
+          .update({'is_completed': isCompleted}).eq('id', todoId);
     }
   }
 
@@ -537,7 +586,8 @@ class KisaSupabaseClient {
           .stream(primaryKey: ['id'])
           .order('created_at', ascending: false)
           .map((records) => records
-              .map((item) => KisaActivity.fromJson(item, currentUserId: _currentUser?.id ?? ''))
+              .map((item) => KisaActivity.fromJson(item,
+                  currentUserId: _currentUser?.id ?? ''))
               .toList());
     }
     return Stream.value(List.from(_cachedActivities));
@@ -550,7 +600,8 @@ class KisaSupabaseClient {
           .select('*, users:user_id(name, avatar_url)')
           .order('created_at', ascending: false);
       return (res as List)
-          .map((item) => KisaActivity.fromJson(item, currentUserId: _currentUser?.id ?? ''))
+          .map((item) => KisaActivity.fromJson(item,
+              currentUserId: _currentUser?.id ?? ''))
           .toList();
     }
     return List.from(_cachedActivities);
@@ -577,7 +628,11 @@ class KisaSupabaseClient {
     );
 
     if (isLiveSupabase) {
-      final res = await client.from('activities').insert(newActivity.toJson()).select().single();
+      final res = await client
+          .from('activities')
+          .insert(newActivity.toJson())
+          .select()
+          .single();
       return KisaActivity.fromJson(res);
     }
 
@@ -590,12 +645,16 @@ class KisaSupabaseClient {
     if (idx != -1) {
       final item = _cachedActivities[idx];
       final newLiked = !item.isLikedByMe;
-      final newCount = newLiked ? item.likesCount + 1 : (item.likesCount > 0 ? item.likesCount - 1 : 0);
-      _cachedActivities[idx] = item.copyWith(isLikedByMe: newLiked, likesCount: newCount);
+      final newCount = newLiked
+          ? item.likesCount + 1
+          : (item.likesCount > 0 ? item.likesCount - 1 : 0);
+      _cachedActivities[idx] =
+          item.copyWith(isLikedByMe: newLiked, likesCount: newCount);
     }
 
     if (isLiveSupabase) {
-      await client.rpc('toggle_activity_like', params: {'activity_id': activityId});
+      await client
+          .rpc('toggle_activity_like', params: {'activity_id': activityId});
     }
   }
 
@@ -647,7 +706,9 @@ class KisaSupabaseClient {
   }
 
   String _generatePairingCode(String name) {
-    final prefix = name.isNotEmpty ? name.substring(0, name.length >= 3 ? 3 : name.length).toUpperCase() : 'KIS';
+    final prefix = name.isNotEmpty
+        ? name.substring(0, name.length >= 3 ? 3 : name.length).toUpperCase()
+        : 'KIS';
     final randomPart = (100 + (DateTime.now().millisecond % 900)).toString();
     return '$prefix-$randomPart';
   }

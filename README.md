@@ -27,6 +27,7 @@
 * **Garis Koneksi Cinta**: Garis putus-putus (*dashed rose polyline*) yang menghubungkan koordinat kedua ponsel.
 * **Fitur Love Poke**: Kirim getaran cinta dan pelukan hangat dengan notifikasi interaktif.
 * **GPS Fast-Cache**: Membaca sinyal BTS/Wi-Fi instan (<50 ms) agar lokasi tetap akurat saat berada di dalam ruangan.
+* **Notifikasi Proximity (< 100m)**: Notifikasi push otomatis di lockscreen & in-app floating banner saat pasangan berada dalam radius kurang dari 100 meter, dilengkapi smart debounce anti-spam.
 
 ### 2. 💬 Status Aktivitas Terkini ("Lagi Ngapain Sekarang?")
 * **12 Preset Cepat Ber-emoji**: Kerja, Ngopi, Kangen Kamu, Istirahat, Belajar, Nonton Film, Jalan-jalan, Olahraga, dll.

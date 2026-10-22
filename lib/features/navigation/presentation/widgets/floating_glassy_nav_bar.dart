@@ -69,7 +69,9 @@ class FloatingGlassyNavBar extends StatelessWidget {
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: isSelected ? KisaColors.blushSoft : Colors.transparent,
+                      color: isSelected
+                          ? KisaColors.blushSoft
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Row(
@@ -78,7 +80,9 @@ class FloatingGlassyNavBar extends StatelessWidget {
                         Icon(
                           isSelected ? item.selectedIcon : item.icon,
                           size: 22,
-                          color: isSelected ? KisaColors.primaryRose : KisaColors.textMuted,
+                          color: isSelected
+                              ? KisaColors.primaryRose
+                              : KisaColors.textMuted,
                         ),
                         if (isSelected) ...[
                           const SizedBox(width: 6),

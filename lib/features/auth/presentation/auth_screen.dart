@@ -66,7 +66,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       final secs = _rateLimiter.remainingLockoutSeconds;
       showKisaToast(
         context,
-        message: 'Terlalu banyak percobaan. Silakan tunggu $secs detik demi keamanan 🔒',
+        message:
+            'Terlalu banyak percobaan. Silakan tunggu $secs detik demi keamanan 🔒',
         icon: Icons.shield_rounded,
         iconColor: Colors.orangeAccent,
       );
@@ -127,7 +128,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       if (password != confirmPassword) {
         showKisaToast(
           context,
-          message: 'Konfirmasi kata sandi tidak cocok. Pastikan keduanya sama ya ❤️',
+          message:
+              'Konfirmasi kata sandi tidak cocok. Pastikan keduanya sama ya ❤️',
           icon: Icons.error_outline_rounded,
           iconColor: Colors.redAccent,
         );
@@ -138,7 +140,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     // 4. Submit to Auth Provider
     bool success;
     if (_isSignUp) {
-      success = await ref.read(authProvider.notifier).signUp(email, password, name);
+      success =
+          await ref.read(authProvider.notifier).signUp(email, password, name);
     } else {
       success = await ref.read(authProvider.notifier).signIn(email, password);
     }
@@ -163,11 +166,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       _rateLimiter.reset();
       final authState = ref.read(authProvider);
       if (authState.isPaired) {
-        Navigator.of(context).pushReplacement(
+        await Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigationScaffold()),
         );
       } else {
-        Navigator.of(context).pushReplacement(
+        await Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const PairingScreen()),
         );
       }
@@ -215,7 +218,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0, vertical: 16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -227,7 +231,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         borderRadius: BorderRadius.circular(26),
                         boxShadow: [
                           BoxShadow(
-                            color: KisaColors.primaryRose.withValues(alpha: 0.16),
+                            color:
+                                KisaColors.primaryRose.withValues(alpha: 0.16),
                             blurRadius: 24,
                             offset: const Offset(0, 8),
                           ),
@@ -272,28 +277,39 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                           Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color: KisaColors.backgroundWarm.withValues(alpha: 0.8),
+                              color: KisaColors.backgroundWarm
+                                  .withValues(alpha: 0.8),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
                               children: [
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () => setState(() => _isSignUp = false),
+                                    onTap: () =>
+                                        setState(() => _isSignUp = false),
                                     child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 200),
-                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10),
                                       decoration: BoxDecoration(
-                                        color: !_isSignUp ? KisaColors.surface : Colors.transparent,
+                                        color: !_isSignUp
+                                            ? KisaColors.surface
+                                            : Colors.transparent,
                                         borderRadius: BorderRadius.circular(18),
-                                        boxShadow: !_isSignUp ? KisaShadows.subtle : null,
+                                        boxShadow: !_isSignUp
+                                            ? KisaShadows.subtle
+                                            : null,
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
                                         'Masuk',
-                                        style: KisaTypography.titleMedium.copyWith(
+                                        style:
+                                            KisaTypography.titleMedium.copyWith(
                                           fontSize: 14,
-                                          color: !_isSignUp ? KisaColors.textPrimary : KisaColors.textMuted,
+                                          color: !_isSignUp
+                                              ? KisaColors.textPrimary
+                                              : KisaColors.textMuted,
                                         ),
                                       ),
                                     ),
@@ -301,21 +317,31 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () => setState(() => _isSignUp = true),
+                                    onTap: () =>
+                                        setState(() => _isSignUp = true),
                                     child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 200),
-                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10),
                                       decoration: BoxDecoration(
-                                        color: _isSignUp ? KisaColors.surface : Colors.transparent,
+                                        color: _isSignUp
+                                            ? KisaColors.surface
+                                            : Colors.transparent,
                                         borderRadius: BorderRadius.circular(18),
-                                        boxShadow: _isSignUp ? KisaShadows.subtle : null,
+                                        boxShadow: _isSignUp
+                                            ? KisaShadows.subtle
+                                            : null,
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
                                         'Daftar Baru',
-                                        style: KisaTypography.titleMedium.copyWith(
+                                        style:
+                                            KisaTypography.titleMedium.copyWith(
                                           fontSize: 14,
-                                          color: _isSignUp ? KisaColors.textPrimary : KisaColors.textMuted,
+                                          color: _isSignUp
+                                              ? KisaColors.textPrimary
+                                              : KisaColors.textMuted,
                                         ),
                                       ),
                                     ),
@@ -353,11 +379,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                             obscureText: _obscurePassword,
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                _obscurePassword
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
                                 color: KisaColors.textMuted,
                                 size: 20,
                               ),
-                              onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                              onPressed: () => setState(
+                                  () => _obscurePassword = !_obscurePassword),
                             ),
                           ),
 
@@ -371,11 +400,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                               obscureText: _obscureConfirmPassword,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _obscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                  _obscureConfirmPassword
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
                                   color: KisaColors.textMuted,
                                   size: 20,
                                 ),
-                                onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                                onPressed: () => setState(() =>
+                                    _obscureConfirmPassword =
+                                        !_obscureConfirmPassword),
                               ),
                             ),
                           ],
@@ -386,13 +419,17 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.orangeAccent.withValues(alpha: 0.12),
+                                color:
+                                    Colors.orangeAccent.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.3)),
+                                border: Border.all(
+                                    color: Colors.orangeAccent
+                                        .withValues(alpha: 0.3)),
                               ),
                               child: Row(
                                 children: [
-                                  const Icon(Icons.shield_rounded, color: Colors.orangeAccent, size: 18),
+                                  const Icon(Icons.shield_rounded,
+                                      color: Colors.orangeAccent, size: 18),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
@@ -410,18 +447,22 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                             const SizedBox(height: 16),
                           ]
                           // Explicit Error Message Banner
-                          else if (authState.errorMessage != null && authState.errorMessage!.isNotEmpty) ...[
+                          else if (authState.errorMessage != null &&
+                              authState.errorMessage!.isNotEmpty) ...[
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 color: Colors.redAccent.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.redAccent.withValues(alpha: 0.3)),
+                                border: Border.all(
+                                    color: Colors.redAccent
+                                        .withValues(alpha: 0.3)),
                               ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(Icons.info_outline_rounded, color: Colors.redAccent, size: 18),
+                                  const Icon(Icons.info_outline_rounded,
+                                      color: Colors.redAccent, size: 18),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
@@ -445,9 +486,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                           BouncyButton.primary(
                             label: _secondsRemaining > 0
                                 ? 'Terkunci ($_secondsRemaining dtk)'
-                                : (_isSignUp ? 'Mulai Cerita Kita' : 'Masuk ke Kisa'),
+                                : (_isSignUp
+                                    ? 'Mulai Cerita Kita'
+                                    : 'Masuk ke Kisa'),
                             isLoading: authState.isLoading,
-                            onTap: _secondsRemaining > 0 ? () {} : _handleSubmit,
+                            onTap:
+                                _secondsRemaining > 0 ? () {} : _handleSubmit,
                             height: 52,
                           ),
                         ],
@@ -460,10 +504,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       onTap: () {
                         ref.read(authProvider.notifier).loginWithDemoMode();
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (_) => const MainNavigationScaffold()),
+                          MaterialPageRoute(
+                              builder: (_) => const MainNavigationScaffold()),
                         );
                       },
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -516,7 +562,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
-          hintStyle: KisaTypography.bodyMedium.copyWith(color: KisaColors.textMuted),
+          hintStyle:
+              KisaTypography.bodyMedium.copyWith(color: KisaColors.textMuted),
           icon: Icon(icon, size: 20, color: KisaColors.textMuted),
           suffixIcon: suffixIcon,
         ),

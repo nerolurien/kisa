@@ -1,7 +1,10 @@
+import '../../../core/constants/app_constants.dart';
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart' hide Haversine;
 import '../../../core/services/location_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/supabase_client.dart';
 import '../../../core/utils/haversine.dart';
 import '../models/kisa_location.dart';
@@ -15,6 +18,9 @@ class MapState {
   final bool isLoading;
   final String? lastPokeMessage;
   final DateTime? lastPokeTime;
+  final bool isWithinProximity; // true if within 100 meters
+  final bool showProximityBanner; // controls in-app top banner
+  final int? proximityMeters; // exact distance in meters when close
 
   const MapState({
     required this.myLocation,
@@ -25,6 +31,9 @@ class MapState {
     this.isLoading = false,
     this.lastPokeMessage,
     this.lastPokeTime,
+    this.isWithinProximity = false,
+    this.showProximityBanner = false,
+    this.proximityMeters,
   });
 
   String get distanceText {
@@ -41,6 +50,9 @@ class MapState {
     bool? isLoading,
     String? lastPokeMessage,
     DateTime? lastPokeTime,
+    bool? isWithinProximity,
+    bool? showProximityBanner,
+    int? proximityMeters,
   }) {
     return MapState(
       myLocation: myLocation ?? this.myLocation,
@@ -51,6 +63,9 @@ class MapState {
       isLoading: isLoading ?? this.isLoading,
       lastPokeMessage: lastPokeMessage ?? this.lastPokeMessage,
       lastPokeTime: lastPokeTime ?? this.lastPokeTime,
+      isWithinProximity: isWithinProximity ?? this.isWithinProximity,
+      showProximityBanner: showProximityBanner ?? this.showProximityBanner,
+      proximityMeters: proximityMeters ?? this.proximityMeters,
     );
   }
 }
@@ -60,11 +75,81 @@ class MapNotifier extends StateNotifier<MapState> {
   final KisaSupabaseClient _supabaseClient;
   StreamSubscription<KisaLocation?>? _partnerLocationSub;
 
+  DateTime? _lastProximityAlertTime;
+  bool _hasAlertedForCurrentEncounter = false;
+
   MapNotifier(this._locationService, this._supabaseClient)
       : super(const MapState(
-          myLocation: LatLng(-6.2088, 106.8456), // Jakarta fallback until GPS loads
+          myLocation:
+              LatLng(-6.2088, 106.8456), // Jakarta fallback until GPS loads
         )) {
     initMap();
+  }
+
+  void _evaluateProximity(double? distKm, String partnerName) {
+    if (distKm == null) return;
+    final meters = (distKm * 1000).round();
+    final now = DateTime.now();
+
+    // Trigger proximity alert if within 100 meters
+    if (meters <= AppConstants.proximityThresholdMeters) {
+      final bool shouldAlert = !_hasAlertedForCurrentEncounter ||
+          _lastProximityAlertTime == null ||
+          now.difference(_lastProximityAlertTime!) >
+              AppConstants.proximityCooldown;
+
+      if (shouldAlert) {
+        _hasAlertedForCurrentEncounter = true;
+        _lastProximityAlertTime = now;
+        HapticFeedback.heavyImpact();
+        NotificationService().showProximityAlert(
+          partnerName: partnerName,
+          distanceMeters: meters,
+        );
+        state = state.copyWith(
+          isWithinProximity: true,
+          showProximityBanner: true,
+          proximityMeters: meters,
+        );
+      } else {
+        state = state.copyWith(
+          isWithinProximity: true,
+          proximityMeters: meters,
+        );
+      }
+    } else if (meters > AppConstants.proximityResetMeters) {
+      // Reset trigger once partner moves past 200m away
+      _hasAlertedForCurrentEncounter = false;
+      if (state.isWithinProximity || state.showProximityBanner) {
+        state = state.copyWith(
+          isWithinProximity: false,
+          showProximityBanner: false,
+          proximityMeters: null,
+        );
+      }
+    }
+  }
+
+  void dismissProximityBanner() {
+    state = state.copyWith(showProximityBanner: false);
+  }
+
+  /// Simulate proximity (< 100m) for instant user testing
+  void simulateProximityForTesting({int meters = 45}) {
+    final partnerName = state.partnerLocation?.userName ?? 'Fexa';
+    _hasAlertedForCurrentEncounter = true;
+    _lastProximityAlertTime = DateTime.now();
+    HapticFeedback.heavyImpact();
+    NotificationService().showProximityAlert(
+      partnerName: partnerName,
+      distanceMeters: meters,
+    );
+    state = state.copyWith(
+      distanceInKm: meters / 1000.0,
+      isWithinProximity: true,
+      showProximityBanner: true,
+      proximityMeters: meters,
+    );
   }
 
   Future<void> initMap() async {
@@ -81,13 +166,13 @@ class MapNotifier extends StateNotifier<MapState> {
     }
 
     // In demo mode, if we have the user's real GPS, place simulated Fexa nearby (~1.2 km away)
-    // so the couple distance & line are displayed in the user's actual neighborhood
     if (!_supabaseClient.isLiveSupabase && realGps) {
       partnerLoc = KisaLocation(
         id: 'loc_01',
         userId: 'usr_fexa_02',
         userName: 'Fexa',
-        avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+        avatarUrl:
+            'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
         latitude: userLoc.latitude + 0.0082,
         longitude: userLoc.longitude + 0.0076,
         updatedAt: DateTime.now().subtract(const Duration(minutes: 2)),
@@ -112,7 +197,12 @@ class MapNotifier extends StateNotifier<MapState> {
       isLoading: false,
     );
 
-    if (_supabaseClient.isLiveSupabase && partnerLoc != null && partnerLoc.userId.isNotEmpty) {
+    final partnerName = partnerLoc?.userName ?? 'Fexa';
+    _evaluateProximity(dist, partnerName);
+
+    if (_supabaseClient.isLiveSupabase &&
+        partnerLoc != null &&
+        partnerLoc.userId.isNotEmpty) {
       _subscribeToPartnerLocation(partnerLoc.userId);
     }
 
@@ -130,7 +220,8 @@ class MapNotifier extends StateNotifier<MapState> {
           id: 'loc_01',
           userId: 'usr_fexa_02',
           userName: 'Fexa',
-          avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+          avatarUrl:
+              'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
           latitude: myPos.latitude + 0.0082,
           longitude: myPos.longitude + 0.0076,
           updatedAt: DateTime.now(),
@@ -152,6 +243,10 @@ class MapNotifier extends StateNotifier<MapState> {
         distanceInKm: dist,
         isLoading: false,
       );
+
+      final partnerName = partnerLoc?.userName ?? 'Fexa';
+      _evaluateProximity(dist, partnerName);
+
       if (_supabaseClient.isLiveSupabase) {
         await _supabaseClient.updateMyLocation(
           latitude: myPos.latitude,
@@ -165,7 +260,8 @@ class MapNotifier extends StateNotifier<MapState> {
 
   void _subscribeToPartnerLocation(String partnerId) {
     _partnerLocationSub?.cancel();
-    _partnerLocationSub = _supabaseClient.streamPartnerLocation(partnerId).listen((newLoc) {
+    _partnerLocationSub =
+        _supabaseClient.streamPartnerLocation(partnerId).listen((newLoc) {
       if (newLoc != null) {
         final dist = KisaHaversine.calculateDistanceKm(
           lat1: state.myLocation.latitude,
@@ -174,6 +270,8 @@ class MapNotifier extends StateNotifier<MapState> {
           lon2: newLoc.longitude,
         );
         state = state.copyWith(partnerLocation: newLoc, distanceInKm: dist);
+        final partnerName = newLoc.userName;
+        _evaluateProximity(dist, partnerName);
       }
     });
   }
@@ -182,12 +280,14 @@ class MapNotifier extends StateNotifier<MapState> {
     _locationService.startLocationUpdates(
       onUpdate: (LatLng newPos, double speed) {
         var partnerLoc = state.partnerLocation;
-        if (!_supabaseClient.isLiveSupabase && (!state.hasRealGps || partnerLoc == null)) {
+        if (!_supabaseClient.isLiveSupabase &&
+            (!state.hasRealGps || partnerLoc == null)) {
           partnerLoc = KisaLocation(
             id: 'loc_01',
             userId: 'usr_fexa_02',
             userName: 'Fexa',
-            avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+            avatarUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
             latitude: newPos.latitude + 0.0082,
             longitude: newPos.longitude + 0.0076,
             updatedAt: DateTime.now().subtract(const Duration(minutes: 2)),
@@ -211,6 +311,9 @@ class MapNotifier extends StateNotifier<MapState> {
           distanceInKm: dist,
           isTracking: true,
         );
+
+        final partnerName = partnerLoc?.userName ?? 'Fexa';
+        _evaluateProximity(dist, partnerName);
 
         if (_supabaseClient.isLiveSupabase) {
           _supabaseClient.updateMyLocation(

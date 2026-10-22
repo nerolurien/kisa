@@ -1,3 +1,4 @@
+import 'core/services/notification_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +37,9 @@ void main() async {
 
   // Initialize central Supabase BaaS Client
   await KisaSupabaseClient().initialize();
+
+  // Initialize local notification service for couple proximity alerts
+  await NotificationService().initialize();
 
   runApp(
     const ProviderScope(

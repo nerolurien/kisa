@@ -57,7 +57,8 @@ class TodoScreen extends ConsumerWidget {
               subtitle: 'Impian & Rencana Masa Depan',
               trailing: BouncyButton.glass(
                 onTap: () => _openAddSheet(context, ref),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -111,7 +112,8 @@ class TodoScreen extends ConsumerWidget {
                                     const SizedBox(height: 4),
                                     Text(
                                       todoState.gamificationCheer,
-                                      style: KisaTypography.titleMedium.copyWith(
+                                      style:
+                                          KisaTypography.titleMedium.copyWith(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -124,7 +126,7 @@ class TodoScreen extends ConsumerWidget {
                               Container(
                                 width: 50,
                                 height: 50,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: KisaColors.blushSoft,
                                 ),
@@ -148,7 +150,8 @@ class TodoScreen extends ConsumerWidget {
                               value: todoState.progressPercentage,
                               minHeight: 7,
                               backgroundColor: KisaColors.backgroundWarm,
-                              valueColor: const AlwaysStoppedAnimation<Color>(KisaColors.primaryRose),
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  KisaColors.primaryRose),
                             ),
                           ),
                         ],
@@ -162,27 +165,37 @@ class TodoScreen extends ConsumerWidget {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: categories.length,
-                        separatorBuilder: (context, index) => const SizedBox(width: 8),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(width: 8),
                         itemBuilder: (context, index) {
                           final cat = categories[index];
                           final isSelected = cat == todoState.selectedCategory;
                           return GestureDetector(
-                            onTap: () => ref.read(todoProvider.notifier).selectCategory(cat),
+                            onTap: () => ref
+                                .read(todoProvider.notifier)
+                                .selectCategory(cat),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 180),
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               decoration: BoxDecoration(
-                                color: isSelected ? KisaColors.primaryRose : KisaColors.surface,
+                                color: isSelected
+                                    ? KisaColors.primaryRose
+                                    : KisaColors.surface,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
-                                  color: isSelected ? KisaColors.primaryRose : KisaColors.borderSubtle,
+                                  color: isSelected
+                                      ? KisaColors.primaryRose
+                                      : KisaColors.borderSubtle,
                                 ),
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 cat,
                                 style: KisaTypography.labelSmall.copyWith(
-                                  color: isSelected ? Colors.white : KisaColors.textSecondary,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : KisaColors.textSecondary,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -212,7 +225,7 @@ class TodoScreen extends ConsumerWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: KisaColors.blushSoft,
                                 ),
@@ -230,7 +243,8 @@ class TodoScreen extends ConsumerWidget {
                               const SizedBox(height: 6),
                               Text(
                                 'Sentuh tombol "+ Wishlist" untuk menambah impian!',
-                                style: KisaTypography.caption.copyWith(color: KisaColors.textMuted),
+                                style: KisaTypography.caption
+                                    .copyWith(color: KisaColors.textMuted),
                               ),
                             ],
                           ),
