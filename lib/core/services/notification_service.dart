@@ -15,7 +15,7 @@ class NotificationService {
 
   /// Initialize system notification channels for Android and iOS
   Future<void> initialize() async {
-    if (_isInitialized) return;
+    if (_isInitialized || kIsWeb) return;
 
     try {
       const AndroidInitializationSettings androidSettings =
@@ -72,6 +72,8 @@ class NotificationService {
     required String partnerName,
     required int distanceMeters,
   }) async {
+    if (kIsWeb) return;
+
     try {
       if (!_isInitialized) {
         await initialize();
@@ -89,7 +91,8 @@ class NotificationService {
         styleInformation: BigTextStyleInformation(''),
       );
 
-      const DarwinNotificationDetails darwinDetails = DarwinNotificationDetails(
+      const DarwinNotificationDetails darwinDetails =
+          DarwinNotificationDetails(
         presentAlert: true,
         presentBadge: true,
         presentSound: true,
